@@ -8,6 +8,7 @@ of advanced computing technologies.
 
 We will be using cloud resources at TACC as our development environment. We will
 access the cloud resources via our SSH clients and TACC account credentials.
+**You will need a TACC username, password, and multifactor token for this class.**
 
 .. attention::
 
@@ -18,7 +19,7 @@ access the cloud resources via our SSH clients and TACC account credentials.
 
 .. code-block:: console
 
-   To: {wallen, charlie, bkuritz, jstubbs} [at] tacc [dot] utexas [dot] edu
+   To: {wallen, jstubbs, charlie} [at] tacc [dot] utexas [dot] edu
    From: you
    Subject: COE 332 TACC Account
    Body: Please include your name, EID, TACC user name
@@ -46,7 +47,7 @@ Research Campus.
     :width: 400px
     :align: center
 
-    A tall guy standing among taller Frontera racks.
+    A tall person standing among taller Frontera racks.
 
 
 **TACC at a Glance**
@@ -64,7 +65,7 @@ Research Campus.
     :align: center
 
 
-**Other TACC Services**
+**Other TACC Activities**
 
 * Portals and gateways
 * Web service APIs
@@ -96,8 +97,13 @@ Research Campus.
 
    Did you already e-mail your TACC username to the course instructors?
 
-
-Which brings us to the question of why are we here teaching this class?
+|
+|
+|
+| Which brings us to the question:       **Why are we here teaching this class?**
+|
+|
+|
 
 Engineering Complex Systems in the Cloud
 ----------------------------------------
@@ -129,56 +135,17 @@ Tapis later on in the semester.
    COE 332.
 
 
-Demo Applications of Tapis
---------------------------
-
 So what can you do with Tapis?
 
 Why would I want to build something similar?
 
 Why should I learn how to use all of these tools and technologies?
 
-Without concrete examples, it can seem rather esoteric. The two vignettes below
+Without concrete examples, it can seem rather esoteric. The vignette below
 hopefully illustrate how a carefully designed framework can be employed to
-tackle real-world problems.
+tackle a real-world problem.
 
-**Vignette 1: Drug Discovery Portal**
-
-*Problem:* The early stages of drug discovery employ a computational process
-called "virtual screening" to narrow millions or even billions of potential drug
-hits down to a few hundred or thousand that can be tested in a lab. The virtual
-screening process can be computationally intensive and difficult for novice
-users to do well.
-
-*Importance:* Virtual screening can save a lot of time and money in the drug
-discovery process by narrowing the search. Small molecules can be tested for
-compatibility with protein targets before the wet lab research begins.
-
-*Approach:* Faculty and staff from UTMB Galveston and TACC used the Tapis
-framework to deploy a service for virtual screening in a point-and click web
-interface.
-
-*Result:* Users of the "Drug Discovery Portal" can upload target proteins and
-click a few buttons to start running large-scale virtual screens directly on
-TACC clusters. No prior experience in virtual screening, the Linux command line
-interface, or batch queueing systems is required.
-
-.. figure:: images/drug_discovery_portal_1.png
-    :width: 400px
-    :align: center
-
-    Drug Discovery Portal web interface.
-
-
-.. figure:: images/drug_discovery_portal_2.png
-    :width: 400px
-    :align: center
-
-    Researchers from around the world using the platform.
-
-Source: https://doi.org/10.1021/ci500531r
-
-**Vignette 2: Real-Time Quantitative MRI**
+**Real-Time Quantitative MRI**
 
 *Problem:* Quantitative analysis of MR images is typically performed after the
 patient has left the scanner. Corrupted or poor quality images can result in
@@ -219,6 +186,42 @@ Source: https://dx.doi.org/10.1109/JBHI.2017.2771299
    If you already e-mailed your TACC account to the instructors, please go ahead
    and try the exercise below.
 
+
+Engineering Complex Systems on ... Mars?
+----------------------------------------
+
+On April 19, 2021, the helicopter *Ingenuity* (part of NASA's Mars 2020 mission
+along with the rover *Perseverance*) completed the first ever "powered
+controlled extraterrestrial flight by an aircraft". As of January 2022, it has
+made \~18 flights recording pictures, sound, position, and other data during
+flight.
+
+.. figure:: images/ingenuity.png
+    :width: 500px
+    :align: center
+
+    Source:  https://en.wikipedia.org/wiki/File:Anatomy_of_the_Mars_Helicopter.png
+
+How do *Perseverance* and *Ingenuity* communicate to carry out missions and
+return that sensor data? The source code for the helicopter / rover themselves are
+not public (as far as I can tell), but NASA JPL credited a
+`long list <https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/personalizing-your-profile#list-of-qualifying-repositories-for-mars-2020-helicopter-contributor-badge>`_
+of open source code repositories on GitHub that the helicopter project depends on.
+
+
+Included in the list are a lot of libraries and tools that we will be using this
+semester to build our cloud systems including: Linux, curl, pycurl, yaml, flask,
+click, pytest, jinja, requests, urllib3, werkzeug, (and many others).
+Looking at the packages, it seems pretty likely that the rover communicates with
+the helicopter through something similar to a REST API! We will all be building
+similar systems this semester.
+
+
+Read more here: https://github.com/readme/featured/nasa-ingenuity-helicopter
+
+
+
+
 Bringing it All Together
 ------------------------
 
@@ -235,11 +238,12 @@ Using your SSH client, please try to log in to the class server **before the
 next class period**:
 
 .. code-block:: console
-   :emphasize-lines: 1,2,23
+   :emphasize-lines: 1,2,3,24
 
    [local]$ ssh username@isp02.tacc.utexas.edu
-   username@isp02.tacc.utexas.edu's password:
-   Last login: Sun Jan 17 23:48:54 2021 from cpe-24-27-53-74.austin.res.rr.com
+   Password:
+   TACC_Token:
+   Last login: Fri Jan 14 09:34:04 2022 from cpe-24-27-53-74.austin.res.rr.com
    ------------------------------------------------------------------------------
    Welcome to the Texas Advanced Computing Center
       at The University of Texas at Austin
@@ -257,7 +261,11 @@ next class period**:
    https://portal.tacc.utexas.edu/tacc-consulting
 
    ------------------------------------------------------------------------------
-   Intel(R) Parallel Studio XE 2017 Update 1 for Linux*
-   Copyright (C) 2009-2016 Intel Corporation. All rights reserved.
+   Intel(R) Parallel Studio XE 2020 Update 1 for Linux*
+   Copyright (C) 2009-2020 Intel Corporation. All rights reserved.
    [remote]$ hostname -f
    isp02.tacc.utexas.edu      # success!
+
+.. note::
+
+   In the above, replace 'username' with your TACC username.
