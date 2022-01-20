@@ -37,7 +37,7 @@ system or ssh client below.
    (enter password)
    (enter token)
 
-**Windows (use WSL or an SCP client like PuTTY)**
+**Windows (use WSL or an SSH client like PuTTY)**
 
 .. code-block:: console
 
