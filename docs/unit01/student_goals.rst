@@ -8,6 +8,7 @@ were edited for typos and readability*):
 **Programming / Languages**
 
 * Hone my coding skills
+* Build better code skills
 * Become more comfortable with my programming skills
 * Become more confident in my programming skills
 * Gain better control of my programming skills and have the ability to implement them into advanced concepts by myself
@@ -16,6 +17,7 @@ were edited for typos and readability*):
 * Become more comfortable with Linux
 * Enhance skills in Linux
 * Better understanding of coding and more specifically python
+* Get a deeper understanding of python
 * Be comfortable in Python
 * Get more proficient with python
 * Learn Java and do practical assignments using it
@@ -47,6 +49,11 @@ were edited for typos and readability*):
 * Flask apps, databases, asynchronous/queues, virtualization, integration, Docker, and REST API
 
 
+**Data Science**
+
+* Be able to create new ways to deal with complex data
+
+
 **Team Work**
 
 * Interact more with my peers and professors
@@ -67,6 +74,7 @@ were edited for typos and readability*):
 * Broaden my knowledge in the programming world to thrive in internships/research I may have in the future
 * Become proficient in python in order to attain an internship or complete a solo project
 * Develop my skills and knowledge, which will get me closer to get into the technology field
+* Be able to carry this information with me throughout college and early into my career
 * Learn to grow my software development skills to be a successful software engineer
 * Enjoy what I am learning
 
