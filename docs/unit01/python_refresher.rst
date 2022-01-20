@@ -406,7 +406,7 @@ lists:
 
 .. code-block:: python3
 
-   >>> my_shape_list = ['circle', 'heart', triangle', 'square']
+   >>> my_shape_list = ['circle', 'heart', 'triangle', 'square']
    >>>
    >>> for shape in my_shape_list:
    ...     print(shape)
