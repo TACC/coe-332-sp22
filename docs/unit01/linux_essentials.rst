@@ -24,23 +24,29 @@ Log in to the Class Server
 To log in to ``isp02.tacc.utexas.edu``, follow the instructions for your operating
 system or ssh client below.
 
+.. note::
+
+   Replace ``username`` with your TACC username.
+
 **Mac / Linux**
 
-.. code-block:: bash
+.. code-block:: console
 
    Open the application 'Terminal'
    ssh username@isp02.tacc.utexas.edu
    (enter password)
+   (enter token)
 
-**Windows**
+**Windows (use WSL or an SCP client like PuTTY)**
 
-.. code-block:: bash
+.. code-block:: console
 
    Open the application 'PuTTY'
    enter Host Name: isp02.tacc.utexas.edu
    (click 'Open')
    (enter username)
    (enter password)
+   (enter token)
 
 
 If you can't access the class server yet, a local or web-based Linux environment
@@ -62,7 +68,7 @@ queues to tell us what our location is. Instead, we use a command - ``pwd``
 (print working directory) - to tell us our present location. Try executing this
 command in the terminal:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ pwd
    /home/wallen
@@ -73,7 +79,7 @@ roughly analogous to C:\\Users\\username on Windows, or /Users/username on Mac.
 To see what files and folders are available at this location, use the ``ls``
 (list) command:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ ls
 
@@ -81,13 +87,13 @@ I have no files or folders in my home directory yet, so I do not get a response.
 We can create some folders using the ``mkdir`` (make directory) command. The
 words 'folder' and 'directory' are interchangeable:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ mkdir folder1
    $ mkdir folder2
    $ mkdir folder3
 
-.. code-block:: bash
+.. code-block:: console
 
    $ ls
    folder1 folder2 folder3
@@ -96,7 +102,7 @@ Now we have some folders to work with. To "open" a folder, navigate into that
 folder using the ``cd`` (change directory) command. This process is analogous to
 double-clicking a folder on Windows or Mac:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ pwd
    /home/wallen/
@@ -106,7 +112,7 @@ double-clicking a folder on Windows or Mac:
 
 Now that we are inside ``folder1``, make a few sub-folders:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ mkdir subfolderA
    $ mkdir subfolderB
@@ -117,7 +123,7 @@ Now that we are inside ``folder1``, make a few sub-folders:
 Use ``cd`` to Navigate into ``subfolderA``, then use ``ls`` to list the
 contents. What do you expect to see?
 
-.. code-block:: bash
+.. code-block:: console
 
    $ cd subfolderA
    $ pwd
@@ -130,7 +136,7 @@ into folders, but how do we navigate back "up" to the parent folder? There are
 different ways to do it. For example, we could specify the complete path of
 where we want to go:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ pwd
    /home/wallen/folder1/subfolderA
@@ -141,7 +147,7 @@ where we want to go:
 Or, we could use a shortcut, ``..``, which refers to the **parent folder** - one
 level higher than the present location:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ pwd
    /home/wallen/folder1
@@ -153,7 +159,7 @@ We are back in our home directory. Finally, use the  ``rmdir`` (remove
 directory) command to remove folders. This will not work on folders that have
 any contents (more on this later):
 
-.. code-block:: bash
+.. code-block:: console
 
    $ mkdir junkfolder
    $ ls
@@ -168,7 +174,7 @@ remove our parent folder ``folder1`` and its subfolders. The ``-r`` command line
 option recursively removes subfolders and files located "down" the parent
 directory. ``-r`` is required for non-empty folders.
 
-.. code-block:: bash
+.. code-block:: console
 
    $ rm -r folder1
    $ ls
@@ -176,7 +182,7 @@ directory. ``-r`` is required for non-empty folders.
 
 Which command should we use to remove ``folder2`` and ``folder3``?
 
-.. code-block:: bash
+.. code-block:: console
 
    $ rmdir folder2
    $ rmdir folder3
@@ -192,7 +198,7 @@ create new files, copy files, rename files, and move files to different
 locations. First, we will navigate to the home directory and create a few new
 folders and files with the ``mkdir`` and ``touch`` commands:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ cd     # cd on an empty line will automatically take you back to the home directory
    $ pwd
@@ -211,7 +217,7 @@ These files we have created are all empty. Removing a file is done with the
 "Recycle Bin". Any file or folder removed is gone forever and often
 un-recoverable:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ touch junkfile
    $ rm junkfile
@@ -221,7 +227,7 @@ works similarly to how you would expect on a Windows or Mac machine. The context
 around the move or copy operation determines what the result will be. For
 example, we could move and/or copy files into folders:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ mv file_a folder1/
    $ mv file_b folder2/
@@ -229,7 +235,7 @@ example, we could move and/or copy files into folders:
 
 Before listing the results with ``ls``, try to guess what the result will be.
 
-.. code-block:: bash
+.. code-block:: console
 
    $ ls
    file_c folder1  folder2  folder3
@@ -244,7 +250,7 @@ Two files have been moved into folders, and ``file_c`` has been copied - so
 there is still a copy of ``file_c`` in the home directory. Move and copy
 commands can also be used to change the name of a file:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ cp file_c file_c_copy
    $ mv file_c file_c_new_name
@@ -255,7 +261,7 @@ use of the ``<Tab>`` key to auto-complete file and folder names, as well as the
 experience. As a general rule, try not to use spaces or strange characters in
 files or folder names. Stick to:
 
-.. code-block:: bash
+.. code-block:: console
 
    A-Z     # capital letters
    a-z     # lowercase letters
@@ -267,7 +273,7 @@ files or folder names. Stick to:
 Before we move on, let's clean up once again by removing the files and folders
 we have created. Do you remember the command for removing non-empty folders?
 
-.. code-block:: bash
+.. code-block:: console
 
    $ rm -r folder1
    $ rm -r folder2
@@ -275,7 +281,7 @@ we have created. Do you remember the command for removing non-empty folders?
 
 How do we remove ``file_c_copy`` and ``file_c_new_name``?
 
-.. code-block:: bash
+.. code-block:: console
 
    $ rm file_c_copy
    $ rm file_c_new_name
@@ -292,7 +298,7 @@ now start looking at some real data. Navigate to your home directory, then issue
 the following ``cp`` command to copy a public file on the server to your local
 space:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ cd ~    # the tilde ~ is also a shortcut referring to your home directory
    $ pwd
@@ -309,7 +315,7 @@ This ``words`` file is a standard file that can be found on most Linux operating
 systems. It contains 479,828 words, each word on its own line. To see the
 contents of a file, use the ``cat`` command to print it to screen:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ cat words
    1080
@@ -328,7 +334,7 @@ This is a long file! Printing everything to screen is much too fast and not very
 useful. We can use a few other commands to look at the contents of the file with
 ``more`` control:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ more words
 
@@ -339,7 +345,7 @@ shows your progress through the file. This is still a little bit messy and fills
 up the screen. The ``less`` command has the same effect, but is a little bit
 cleaner:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ less words
 
@@ -351,7 +357,7 @@ will cycle through other matches, if they exist.
 Finally, you can view just the beginning or the end of a file with the ``head``
 and ``tail`` commands. For example:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ head words
    $ tail words
@@ -360,7 +366,7 @@ The ``>`` and ``>>`` shortcuts in Linux indicate that you would like to redirect
 the output of one of the commands above. Instead of printing to screen, the
 output can be redirected into a file:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ cat words > words_new.txt
    $ head words > first_10_lines.txt
@@ -373,7 +379,7 @@ One final useful way to look at the contents of files is with the ``grep``
 command. ``grep`` searches a file for a specific pattern, and returns all lines
 that match the pattern. For example:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ grep "banana" words
    banana
@@ -394,7 +400,7 @@ In order to login or transfer files to a remote Linux file system, you must know
 the hostname (unique network identifier) and the username. If you are already on
 a Linux file system, those are easy to determine using the following commands:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ whoami
    wallen
@@ -404,17 +410,18 @@ a Linux file system, those are easy to determine using the following commands:
 Given that information, a user would remotely login to this Linux machine using
 ssh in a Terminal:
 
-.. code-block:: bash
+.. code-block:: console
 
    [local]$ ssh wallen@isp02.tacc.utexas.edu
    (enter password)
-   [isp02]$ 
+   (enter token)
+   [isp02]$
 
 Windows users would typically use the program **PuTTY** (or another SSH client)
 to perform this operation. Logging out of a remote system is done using the
 ``logout`` command, or the shortcut ``<Ctrl+d>``:
 
-.. code-block:: bash
+.. code-block:: console
 
   [isp02]$ logout
   [local]$
@@ -423,10 +430,11 @@ to perform this operation. Logging out of a remote system is done using the
 Copying files from your local computer to your home folder on ISP would require
 the ``scp`` command (Windows users use a client "WinSCP"):
 
-.. code-block:: bash
+.. code-block:: console
 
    [local]$ scp my_file wallen@isp02.tacc.utexas.edu:/home/wallen/
    (enter password)
+   (enter token)
 
 In this command, you specify the name of the file you want to transfer
 (``my_file``), the username (``wallen``), the hostname
@@ -436,17 +444,18 @@ the ``@`` symbol, and the ``:``.
 
 Copy files from ISP to your local computer using the following:
 
-.. code-block:: bash
+.. code-block:: console
 
    [local]$ scp wallen@isp02.tacc.utexas.edu:/home/wallen/my_file ./
    (enter password)
+   (enter token)
 
 Instead of files, full directories can be copied using the "recursive" flag
 (``scp -r ...``). The ``rsync`` tool is an advanced copy tool that is useful for
 synching data between two sites. Although we will not go into depth here,
 example ``rsync`` usage is as follows:
 
-.. code-block:: bash
+.. code-block:: console
 
    $ rsync -azv local remote
    $ rsync -azv remote local
@@ -465,7 +474,7 @@ VIM is a text editor used on Linux file systems.
 
 Open a file (or create a new file if it does not exist):
 
-.. code-block:: bash
+.. code-block:: console
 
    $ vim file_name
 
@@ -479,19 +488,20 @@ are ``i`` and ``Esc``.
 
 Entering VIM insert mode:
 
-.. code-block:: bash
+.. code-block:: console
 
    > i
 
 Entering VIM normal mode:
 
-.. code-block:: bash
+.. code-block:: console
 
    > Esc
 
 A summary of the most important keys to know for normal mode are:
 
-.. code-block:: bash
+.. code-block:: text
+   :emphasize-lines: 1,14
 
    # Navigating the file:
 
