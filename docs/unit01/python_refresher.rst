@@ -28,23 +28,30 @@ Log in to the Class Server
 To log in to ``isp02.tacc.utexas.edu``, follow the instructions for your operating
 system or ssh client below.
 
+.. note::
+
+   Replace ``username`` with your TACC username.
+
 **Mac / Linux**
 
-.. code-block:: bash
+.. code-block:: console
 
    Open the application 'Terminal'
    ssh username@isp02.tacc.utexas.edu
    (enter password)
+   (enter token)
 
-**Windows**
+**Windows (use WSL or an SCP client like PuTTY)**
 
-.. code-block:: bash
+.. code-block:: console
 
    Open the application 'PuTTY'
    enter Host Name: isp02.tacc.utexas.edu
    (click 'Open')
    (enter username)
    (enter password)
+   (enter token)
+
 
 If you can't access the class server yet, a local or web-based Python 3
 environment will work for this guide. However, you will need to access the class
@@ -110,9 +117,9 @@ Print the values of each variable using the ``print()`` function:
 
 .. code-block:: python3
 
-   >> print(my_int)
+   >>> print(my_int)
    5
-   >> print('my_int')
+   >>> print('my_int')
    my_int
 
 (Try printing the others as well). And, notice what happens when we print with
@@ -148,7 +155,8 @@ Arithmetic Operations
 Next, we will look at some basic arithmetic. You are probably familiar with the
 standard operations from other languages:
 
-.. code-block:: console
+.. code-block:: text
+   :emphasize-lines: 1
 
    Operator   Function          Example   Result
    +          Addition          1+1       2
@@ -200,11 +208,11 @@ Declare a list with square brackets as follows:
 
 .. code-block:: python3
 
-   >>> my_shape_list = ['circle', 'triangle', 'square', 'diamond']
+   >>> my_shape_list = ['circle', 'heart', 'triangle', 'square']
    >>> type(my_shape_list)
    <class 'list'>
    >>> print(my_shape_list)
-   ['circle', 'triangle', 'square', 'diamond']
+   ['circle', 'heart', 'triangle', 'square']
 
 Access individual list elements:
 
@@ -215,7 +223,7 @@ Access individual list elements:
    >>> type(my_shape_list[0])
    <class 'str'>
    >>> print(my_shape_list[2])
-   square
+   triangle
 
 Create an empty list and add things to it:
 
@@ -240,7 +248,7 @@ to demonstrate:
 
    >>> my_big_list = my_shape_list + my_number_list
    >>> print(my_big_list)
-   ['circle', 'triangle', 'square', 'diamond', 5, 6, 2, 4]
+   ['circle', 'heart', 'triangle', 'square', 5, 6, 2, 4]
 
 Another way to access the contents of lists is by slicing. Slicing supports a
 start index, stop index, and step taking the form: ``mylist[start:stop:step]``.
@@ -317,7 +325,8 @@ Python **comparison operators** allow you to add conditions into your code in
 the form of ``if`` / ``elif`` / ``else`` statements. Valid comparison operators
 include:
 
-.. code-block:: console
+.. code-block:: text
+   :emphasize-lines: 1
 
    Operator   Comparison                 Example   Result
    ==         Equal                      1==2       False
@@ -345,7 +354,8 @@ A valid conditional statement might look like:
 In addition, conditional statements can be combined with **logical operators**.
 Valid logical operators include:
 
-.. code-block:: console
+.. code-block:: text
+   :emphasize-lines: 1
 
    Operator   Description                           Example
    and        Returns True if both are True         a < b and c < d
@@ -396,7 +406,7 @@ lists:
 
 .. code-block:: python3
 
-   >>> my_shape_list = ['circle', 'triangle', 'square', 'diamond']
+   >>> my_shape_list = ['circle', 'heart', triangle', 'square']
    >>>
    >>> for shape in my_shape_list:
    ...     print(shape)
@@ -439,7 +449,7 @@ absolutely essential to keeping code clean and organized.
 
 On the command line, use a text editor to start writing a Python script:
 
-.. code-block:: bash
+.. code-block:: console
 
    [isp02]$ vim function_test.py
 
@@ -454,10 +464,10 @@ Enter the following text into the script:
 
    hello_world()
 
-After saving and quiting the file, execute the script (Python code is not
+After saving and quitting the file, execute the script (Python code is not
 compiled - just run the raw script with the ``python3`` executable):
 
-.. code-block:: bash
+.. code-block:: console
 
    [isp02]$ python3 function_test.py
    Hello, world!
@@ -480,7 +490,7 @@ More advanced functions can take parameters and return results:
    final_number = add5(10)
    print(final_number)
 
-.. code-block:: bash
+.. code-block:: console
 
    15
 
@@ -495,7 +505,7 @@ Pass multiple parameters to a function:
    final_number = add5_after_multiplying(10, 2)
    print(final_number)
 
-.. code-block:: bash
+.. code-block:: console
 
    25
 
@@ -510,13 +520,13 @@ to iterate over multiple lists:
            if (x[0] == 't'):      # a string (x) can be interpreted as a list of chars!
                print(x)
 
-   list1 = ['circle', 'triangle', 'square', 'diamond']
+   list1 = ['circle', 'heart', 'triangle', 'square']
    list2 = ['one', 'two', 'three', 'four']
 
    print_ts(list1)
    print_ts(list2)
 
-.. code-block:: bash
+.. code-block:: console
 
    triangle
    two
@@ -543,7 +553,7 @@ For example, to read a file do the following:
        for x in range(5):
            print(f.readline())
 
-.. code-block:: bash
+.. code-block:: text
 
    1080
 
@@ -578,7 +588,7 @@ is the easiest way to solve this problem:
        for x in range(5):
            print(f.readline().strip('\n'))
 
-.. code-block:: bash
+.. code-block:: text
 
    1080
    10-point
@@ -600,7 +610,7 @@ Read the whole file and store it as a list:
    for x in range(5):
        print(words[x])
 
-.. code-block:: bash
+.. code-block:: text
 
    1080
    10-point
@@ -615,17 +625,17 @@ write somwhere where you have permissions to write:
 .. code-block:: python3
    :linenos:
 
-   my_shapes = ['circle', 'triangle', 'square', 'diamond']
+   my_shapes = ['circle', 'heart', 'triangle', 'square']
 
    with open('my_shapes.txt', 'w') as f:
        for shape in my_shapes:
            f.write(shape)
 
 
-.. code-block:: bash
+.. code-block:: console
 
    (in my_shapes.txt)
-   circletrianglesquarediamond
+   circlehearttrianglesquare
 
 
 You may notice the output file is lacking in newlines this time. Try adding
@@ -634,19 +644,20 @@ newline characters to your output:
 .. code-block:: python3
    :linenos:
 
-   my_shapes = ['circle', 'triangle', 'square', 'diamond']
+   my_shapes = ['circle', 'heart', 'triangle', 'square']
 
    with open('my_shapes.txt', 'w') as f:
        for shape in my_shapes:
            f.write( f'{shape}\n' )
 
-.. code-block:: bash
+.. code-block:: console
 
    (in my_shapes.txt)
    circle
+   heart
    triangle
    square
-   diamond
+
 
 Now notice that the original line in the output file is gone - it has been
 overwritten. Be careful if you are using write (``w``) vs. append (``a``).
