@@ -19,6 +19,13 @@ provide a web-accessible interface to their system.
    :caption: Course Schedule:
 
    unit01/overview
+   unit02/overview
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Homeworks:
+
+   homework/homework01.rst
 
 
 Additional Resources
