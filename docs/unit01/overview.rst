@@ -16,4 +16,5 @@ will be necessary for the rest of this course.
    student_goals
    linux_essentials
    python_refresher
-   version_control
+   version_control_1
+   version_control_2
