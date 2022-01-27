@@ -100,6 +100,19 @@ repository to the repository on GitHub:
     * [new branch]      main -> main
    Branch main set up to track remote branch main from origin.
 
+Now that the repositories are synced, your development workflow has evolved to
+include the ``git push`` operation. From here on, if you make changes to your code,
+you can expect to follow the changes with the commands:
+
+.. code-block:: console
+
+   # Make some edits to "example_file.py"
+   [isp02]$ git status
+   [isp02]$ git add example_file.py
+   [isp02]$ git commit -m "description of changes"
+   [isp02]$ git push
+
+
 
 Clone the Repository
 --------------------
@@ -116,6 +129,72 @@ a full copy of ``my_first_repo`` including all the commit history by performing:
    remote: Compressing objects: 100% (10/10), done.
    remote: Total 15 (delta 4), reused 15 (delta 4), pack-reused 0
    Unpacking objects: 100% (15/15), done.
+
+
+
+If the repository on GitHub gets ahead of your local repository, i.e. it has some
+changes in it that someone else pushed from somewhere else, or you pushed from a
+different machine, then you can try to update your local repository to pull the
+changes back down.
+
+.. code-block:: console
+
+   [isp02]$ git remote update    # checks to see if there are updates in the remote
+   [isp02]$ git pull             # pulls those updates down to local
+
+.. warning::
+
+   If you have changes in local files that conflict with the remote repository
+   (i.e. the repository on GitHub), the ``git pull`` will fail and you have
+   found your way into a "merge conflict".
+   `Good luck! <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts>`_
+
+
+Git / Version Control Concepts
+------------------------------
+
+Let's take a quick intermission to lean some important definitions (most of these
+things can easily be managed in the GitHub web interface):
+
+Fork
+~~~~
+
+A fork is a personal copy of another user's repository that lives on your
+account. Forks allow you to freely make changes to a project without affecting
+the original. Forks remain attached to the original, allowing you to submit a
+pull request to the original's author to update with your changes. You can also
+keep your fork up to date by pulling in updates from the original.
+
+Branch
+~~~~~~
+
+A branch is a parallel version of a repository. It is contained within the
+repository, but does not affect the primary or main branch allowing you to
+work freely without disrupting the "live" version. When you've made the changes
+you want to make, you can merge your branch back into the main branch to
+publish your changes. For more information, see
+`About branches <https://help.github.com/articles/about-branches>`_.
+
+Tag
+~~~
+
+Git has the ability to tag specific points in history as being important.
+Typically people use this functionality to mark release points (v1.0, and so
+on).
+
+
+Pull Request / Merge Request
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Pull requests are proposed changes to a repository submitted by a user and
+accepted or rejected by a repository's collaborators. Like issues, pull requests
+ach have their own discussion forum. For more information, see `About pull
+requests <https://help.github.com/articles/about-pull-requests>`_.
+
+
+
+
+
 
 
 Collaborating with Others
@@ -137,66 +216,71 @@ repositories where separate individuals are working on different features is the
    GitFlow model
 
 
-Some important definitions (most can easily be managed right in the GitHub web
-interface):
 
-FORK
-~~~~
+EXERCISE
+~~~~~~~~
 
-A fork is a personal copy of another user's repository that lives on your
-account. Forks allow you to freely make changes to a project without affecting
-the original. Forks remain attached to the original, allowing you to submit a
-pull request to the original's author to update with your changes. You can also
-keep your fork up to date by pulling in updates from the original.
+Let's work on a **branch** plus **pull request** in the GitHub web interface.
 
-BRANCH
-~~~~~~
+* Locate and navigate to your repository
+* Click on the branch / tag navigator near the top right and start typing in a
+  new name to create a new branch
+* By default, it should switch you to the new branch. Click on one of your files
+  and edit it (e.g. add a comment) directly in the web interface
+* Navigate to the "Pull requests" tab and click on "New pull request"
+* Make sure to select the original branch "main" as the base, and your new branch
+  as the downstream for comparison
+* Review the code changes and make everything is as expected before choosing
+  "Create pull request"
+* Now the owner of the repository (you) can accept the pull request, merging
+  the edits into the main branch
 
-A branch is a parallel version of a repository. It is contained within the
-repository, but does not affect the primary or main branch allowing you to
-work freely without disrupting the "live" version. When you've made the changes
-you want to make, you can merge your branch back into the main branch to
-publish your changes. For more information, see
-`About branches <https://help.github.com/articles/about-branches>`_.
-
-TAG
-~~~
-
-Git has the ability to tag specific points in history as being important.
-Typically people use this functionality to mark release points (v1.0, and so
-on).
+What are the differences between a "merge commit", "squash and merge", and "rebase
+and merge"? The differences are subtle. All will result in the edits getting
+merged into the main branch. It is mostly a stylistic thing, and the best method
+depends on whatever the rest of developers agree to use. More info on the
+differences `here <https://rietta.com/blog/github-merge-types/>`_.
 
 
-PULL REQUEST / MERGE REQUEST
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Pull requests are proposed changes to a repository submitted by a user and
-accepted or rejected by a repository's collaborators. Like issues, pull requests
-ach have their own discussion forum. For more information, see `About pull
-requests <https://help.github.com/articles/about-pull-requests>`_.
+EXERCISE
+~~~~~~~~
+
+Let's next work on a **fork** plus **pull request** in the GitHub web interface.
+
+* Navigate to this repository: https://github.com/jagaither/coe-332-forking-demo
+* Click the "Fork" button near the top right and fork it to your own user space
+* Now you could either ``git clone`` your fork to isp02, put in a new file, then
+  ``git add`` => ``git commit` => ``git push``; OR you could click "Add file" in
+  the GitHub web interface and create a new file that way
+* Navigate again to the "Pull requests" tab and click to create a "New pull request"
+* Make sure the original repo (``jagaither``) is set as the base and your fork
+  is set as the head
+* Create the pull request and provide enough detail for the repository owner
+  (``jagaither``) to know whether he should accept your pull request or not
 
 
-OTHER CONSIDERATIONS
-~~~~~~~~~~~~~~~~~~~~
+Consult the documentation in the base repository (if documentation exists) and
+look out for general guidance for contributors. If you develop a new feature and
+it is merged back into the base, you can generally just delete your fork.
+
+
+Other Considerations
+--------------------
 
 Most repos will also contain a few standard files in the top directory,
 including:
 
 **README.md**: The landing page of your repository on GitHub will display the
 contents of README.md, if it exists. This is a good place to describe your
-project and list the appropriate citations.
+project and list the appropriate citations. *Please note that all of your
+homeworks, midterm, and final will require READMEs*.
 
 **LICENSE.txt**: See if your repository needs a license
 `here <https://help.github.com/articles/licensing-a-repository/>`_.
 
 
-EXERCISE
-~~~~~~~~
 
-* In the GitHub web interface, locate your repo, create a new branch, make edits
-  to the branch, create a pull request to the main, and merge the pull request
-* In the GitHub web interface, fork this demo repo: https://github.com/jagaither/coe-332-forking-demo,
-  make edits in the fork, create a pull request to the original
 
 
 Additional Resources
