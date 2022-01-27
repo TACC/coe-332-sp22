@@ -546,6 +546,32 @@ Again, we can put things back the way they were by using ``git checkout``:
    # back to the most recent version
 
 
+Summing Up
+----------
+
+To summarize the first Git module, the commands we covered were:
+
+.. code-block:: text
+
+   git config     # Get and set repository or global options
+   git init       # Create an empty Git repository or reinitialize an existing one
+   git status     # Show the working tree status
+   git add        # Add file contents to the index
+   git commit     # Record changes to the repository
+   git diff       # Show changes between commits, commit and working tree, etc
+   git log        # Show commit logs
+   git checkout   # Checkout a branch or paths to the working tree
+
+The key takeaway is the general workflow of *making some changes* => ``git add``
+=> ``git commit``. If you think of Git as taking snapshots of changes over the
+life of a project, ``git add`` specifies what will go in a snapshot (putting
+things in the staging area), and ``git commit`` actually takes the snapshot, and
+makes a permanent record of it (as a commit).
+
+.. figure:: ./images/git-staging-area.svg
+    :width: 600px
+    :align: center
+
 
 
 Additional Resources
