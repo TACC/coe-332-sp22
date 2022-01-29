@@ -276,8 +276,8 @@ contents of README.md, if it exists. This is a good place to describe your
 project and list the appropriate citations. *Please note that all of your
 homeworks, midterm, and final will require READMEs*.
 
-**LICENSE.txt**: See if your repository needs a license
-`here <https://help.github.com/articles/licensing-a-repository/>`_.
+**LICENSE.txt**: See if your repository needs a
+`license <https://help.github.com/articles/licensing-a-repository/>`_.
 
 
 
