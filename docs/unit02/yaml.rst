@@ -1,11 +1,11 @@
 YAML Reference
 ==============
 
-This reference guide is designed to introduce you to YAML syntax. YAML is
-basically JSON with a couple extra features, and meant to be a little more human
-readable. We will be using YAML formatted configuration files in the Docker
-compose and Kubernetes sections, so it is important to become familiar with the
-syntax.
+This reference guide is designed to introduce you to YAML syntax. YAML (YAML
+Ain't Markup Language) is basically JSON with a couple extra features, and meant
+to be a little more human readable. We will be using YAML formatted configuration
+files in the Docker compose and Kubernetes sections, so it is important to become
+familiar with the syntax.
 
 
 YAML Basics
