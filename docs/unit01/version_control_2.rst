@@ -279,7 +279,8 @@ homeworks, midterm, and final will require READMEs*.
 **LICENSE.txt**: See if your repository needs a
 `license <https://help.github.com/articles/licensing-a-repository/>`_.
 
-
+**.gitignore**: Tells Git which files and directories to ignore when you make a
+commit.
 
 
 
