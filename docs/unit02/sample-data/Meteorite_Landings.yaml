@@ -1,0 +1,213 @@
+---
+meteorite_landings:
+- GeoLocation: (50.775, 6.08333)
+  id: 10001
+  mass (g): 21
+  name: Ruiz
+  recclass: L5
+  reclat: 50.775
+  reclong: 6.08333
+- GeoLocation: (56.18333, 10.23333)
+  id: 10002
+  mass (g): 720
+  name: Beeler
+  recclass: H6
+  reclat: 56.18333
+  reclong: 10.23333
+- GeoLocation: (54.21667, -113.0)
+  id: 10003
+  mass (g): 107000
+  name: Brock
+  recclass: EH4
+  reclat: 54.21667
+  reclong: -113
+- GeoLocation: (16.88333, -99.9)
+  id: 10004
+  mass (g): 1914
+  name: Hillebrand
+  recclass: Acapulcoite
+  reclat: 16.88333
+  reclong: -99.9
+- GeoLocation: (-33.16667, -64.95)
+  id: 10005
+  mass (g): 780
+  name: Mitchell
+  recclass: L6
+  reclat: -33.16667
+  reclong: -64.95
+- GeoLocation: (32.1, 71.8)
+  id: 10006
+  mass (g): 4239
+  name: Ortiz
+  recclass: EH4
+  reclat: 32.1
+  reclong: 71.8
+- GeoLocation: (44.83333, 95.16667)
+  id: 10007
+  mass (g): 910
+  name: Souza
+  recclass: LL3-6
+  reclat: 44.83333
+  reclong: 95.16667
+- GeoLocation: (44.21667, 0.61667)
+  id: 10008
+  mass (g): 30000
+  name: Toler
+  recclass: H5
+  reclat: 44.21667
+  reclong: 0.61667
+- GeoLocation: (-31.6, -65.23333)
+  id: 10009
+  mass (g): 1620
+  name: Hachey
+  recclass: L6
+  reclat: -31.6
+  reclong: -65.23333
+- GeoLocation: (-30.86667, -64.55)
+  id: 10010
+  mass (g): 1440
+  name: Alexander
+  recclass: L
+  reclat: -30.86667
+  reclong: -64.55
+- GeoLocation: (16.39806, -9.57028)
+  id: 10011
+  mass (g): 1000
+  name: Nunez
+  recclass: Diogenite-pm
+  reclat: 16.39806
+  reclong: -9.57028
+- GeoLocation: (19.08333, 8.38333)
+  id: 10012
+  mass (g): 24000
+  name: Chester
+  recclass: L6
+  reclat: 19.08333
+  reclong: 8.38333
+- GeoLocation: (26.58333, 85.56667)
+  id: 10013
+  mass (g): 2700
+  name: Obermeyer
+  recclass: Stone-uncl
+  reclat: 26.58333
+  reclong: 85.56667
+- GeoLocation: (29.51667, 35.05)
+  id: 10014
+  mass (g): 779
+  name: Paris
+  recclass: L6
+  reclat: 29.51667
+  reclong: 35.05
+- GeoLocation: (29.71667, 77.95)
+  id: 10015
+  mass (g): 1800
+  name: Kelly
+  recclass: H4
+  reclat: 29.71667
+  reclong: 77.95
+- GeoLocation: (8.91667, 8.43333)
+  id: 10016
+  mass (g): 3000
+  name: Smith
+  recclass: H
+  reclat: 8.91667
+  reclong: 8.43333
+- GeoLocation: (39.91667, 42.81667)
+  id: 10017
+  mass (g): 50000
+  name: Wills
+  recclass: Iron-IVA
+  reclat: 39.91667
+  reclong: 42.81667
+- GeoLocation: (24.41667, 39.51667)
+  id: 10018
+  mass (g): 160
+  name: Becker
+  recclass: CR2-an
+  reclat: 24.41667
+  reclong: 39.51667
+- GeoLocation: (13.66033, 28.96)
+  id: 10019
+  mass (g): 700
+  name: Ray
+  recclass: LL5
+  reclat: 13.66033
+  reclong: 28.96
+- GeoLocation: (44.11667, 4.08333)
+  id: 10020
+  mass (g): 6000
+  name: Obrien
+  recclass: CI1
+  reclat: 44.11667
+  reclong: 4.08333
+- GeoLocation: (44.65, 11.01667)
+  id: 10021
+  mass (g): 2000
+  name: Green
+  recclass: L/LL4
+  reclat: 44.65
+  reclong: 11.01667
+- GeoLocation: (2.0, 22.66667)
+  id: 10022
+  mass (g): 625
+  name: Bell
+  recclass: L
+  reclat: 2
+  reclong: 22.66667
+- GeoLocation: (45.82133, 6.01533)
+  id: 10023
+  mass (g): 252
+  name: Guillaume
+  recclass: Eucrite-mmict
+  reclat: 45.82133
+  reclong: 6.01533
+- GeoLocation: (51.78333, -1.78333)
+  id: 10024
+  mass (g): 700
+  name: Bautista
+  recclass: LL5
+  reclat: 51.78333
+  reclong: -1.78333
+- GeoLocation: (36.23333, 37.13333)
+  id: 10025
+  mass (g): 3200
+  name: Delgado
+  recclass: L6
+  reclat: 36.23333
+  reclong: 37.13333
+- GeoLocation: (44.88333, 8.75)
+  id: 10026
+  mass (g): 908
+  name: Thompson
+  recclass: H5
+  reclat: 44.88333
+  reclong: 8.75
+- GeoLocation: (50.95, 31.81667)
+  id: 10027
+  mass (g): 9251
+  name: Fritter
+  recclass: H4
+  reclat: 50.95
+  reclong: 31.81667
+- GeoLocation: (45.26667, 10.15)
+  id: 10028
+  mass (g): 228000
+  name: Fletcher
+  recclass: L6
+  reclat: 45.26667
+  reclong: 10.15
+- GeoLocation: (42.53333, -85.88333)
+  id: 10029
+  mass (g): 32000
+  name: Belin
+  recclass: H5
+  reclat: 42.53333
+  reclong: -85.88333
+- GeoLocation: (26.96667, -105.31667)
+  id: 10030
+  mass (g): 2000000
+  name: Poeschel
+  recclass: CV3
+  reclat: 26.96667
+  reclong: -105.31667
+...
