@@ -1,0 +1,139 @@
+{
+  "meteorite_landings": [
+    {
+      "name": "Beeler",
+      "id": "10002",
+      "recclass": "H6",
+      "mass (g)": "720",
+      "reclat": "56.18333",
+      "reclong": "10.23333",
+      "GeoLocation": "(56.18333, 10.23333)"
+    },
+    {
+      "name": "Hillebrand",
+      "id": "10004",
+      "recclass": "Acapulcoite",
+      "mass (g)": "1914",
+      "reclat": "16.88333",
+      "reclong": "-99.9",
+      "GeoLocation": "(16.88333, -99.9)"
+    },
+    {
+      "name": "Ortiz",
+      "id": "10006",
+      "recclass": "EH4",
+      "mass (g)": "4239",
+      "reclat": "32.1",
+      "reclong": "71.8",
+      "GeoLocation": "(32.1, 71.8)"
+    },
+    {
+      "name": "Toler",
+      "id": "10008",
+      "recclass": "H5",
+      "mass (g)": "30000",
+      "reclat": "44.21667",
+      "reclong": "0.61667",
+      "GeoLocation": "(44.21667, 0.61667)"
+    },
+    {
+      "name": "Alexander",
+      "id": "10010",
+      "recclass": "L",
+      "mass (g)": "1440",
+      "reclat": "-30.86667",
+      "reclong": "-64.55",
+      "GeoLocation": "(-30.86667, -64.55)"
+    },
+    {
+      "name": "Chester",
+      "id": "10012",
+      "recclass": "L6",
+      "mass (g)": "24000",
+      "reclat": "19.08333",
+      "reclong": "8.38333",
+      "GeoLocation": "(19.08333, 8.38333)"
+    },
+    {
+      "name": "Paris",
+      "id": "10014",
+      "recclass": "L6",
+      "mass (g)": "779",
+      "reclat": "29.51667",
+      "reclong": "35.05",
+      "GeoLocation": "(29.51667, 35.05)"
+    },
+    {
+      "name": "Smith",
+      "id": "10016",
+      "recclass": "H",
+      "mass (g)": "3000",
+      "reclat": "8.91667",
+      "reclong": "8.43333",
+      "GeoLocation": "(8.91667, 8.43333)"
+    },
+    {
+      "name": "Becker",
+      "id": "10018",
+      "recclass": "CR2-an",
+      "mass (g)": "160",
+      "reclat": "24.41667",
+      "reclong": "39.51667",
+      "GeoLocation": "(24.41667, 39.51667)"
+    },
+    {
+      "name": "Obrien",
+      "id": "10020",
+      "recclass": "CI1",
+      "mass (g)": "6000",
+      "reclat": "44.11667",
+      "reclong": "4.08333",
+      "GeoLocation": "(44.11667, 4.08333)"
+    },
+    {
+      "name": "Bell",
+      "id": "10022",
+      "recclass": "L",
+      "mass (g)": "625",
+      "reclat": "2",
+      "reclong": "22.66667",
+      "GeoLocation": "(2.0, 22.66667)"
+    },
+    {
+      "name": "Bautista",
+      "id": "10024",
+      "recclass": "LL5",
+      "mass (g)": "700",
+      "reclat": "51.78333",
+      "reclong": "-1.78333",
+      "GeoLocation": "(51.78333, -1.78333)"
+    },
+    {
+      "name": "Thompson",
+      "id": "10026",
+      "recclass": "H5",
+      "mass (g)": "908",
+      "reclat": "44.88333",
+      "reclong": "8.75",
+      "GeoLocation": "(44.88333, 8.75)"
+    },
+    {
+      "name": "Fletcher",
+      "id": "10028",
+      "recclass": "L6",
+      "mass (g)": "228000",
+      "reclat": "45.26667",
+      "reclong": "10.15",
+      "GeoLocation": "(45.26667, 10.15)"
+    },
+    {
+      "name": "Poeschel",
+      "id": "10030",
+      "recclass": "CV3",
+      "mass (g)": "2000000",
+      "reclat": "26.96667",
+      "reclong": "-105.31667",
+      "GeoLocation": "(26.96667, -105.31667)"
+    }
+  ]
+}
