@@ -4,7 +4,7 @@
 		<name>Ruiz</name>
 		<id>10001</id>
 		<recclass>L5</recclass>
-		<mass (g)>21</mass (g)>
+		<mass>21</mass>
 		<reclat>50.775</reclat>
 		<reclong>6.08333</reclong>
 		<GeoLocation>(50.775, 6.08333)</GeoLocation>
@@ -13,7 +13,7 @@
 		<name>Beeler</name>
 		<id>10002</id>
 		<recclass>H6</recclass>
-		<mass (g)>720</mass (g)>
+		<mass>720</mass>
 		<reclat>56.18333</reclat>
 		<reclong>10.23333</reclong>
 		<GeoLocation>(56.18333, 10.23333)</GeoLocation>
@@ -22,7 +22,7 @@
 		<name>Brock</name>
 		<id>10003</id>
 		<recclass>EH4</recclass>
-		<mass (g)>107000</mass (g)>
+		<mass>107000</mass>
 		<reclat>54.21667</reclat>
 		<reclong>-113</reclong>
 		<GeoLocation>(54.21667, -113.0)</GeoLocation>
@@ -31,7 +31,7 @@
 		<name>Hillebrand</name>
 		<id>10004</id>
 		<recclass>Acapulcoite</recclass>
-		<mass (g)>1914</mass (g)>
+		<mass>1914</mass>
 		<reclat>16.88333</reclat>
 		<reclong>-99.9</reclong>
 		<GeoLocation>(16.88333, -99.9)</GeoLocation>
@@ -40,7 +40,7 @@
 		<name>Mitchell</name>
 		<id>10005</id>
 		<recclass>L6</recclass>
-		<mass (g)>780</mass (g)>
+		<mass>780</mass>
 		<reclat>-33.16667</reclat>
 		<reclong>-64.95</reclong>
 		<GeoLocation>(-33.16667, -64.95)</GeoLocation>
@@ -49,7 +49,7 @@
 		<name>Ortiz</name>
 		<id>10006</id>
 		<recclass>EH4</recclass>
-		<mass (g)>4239</mass (g)>
+		<mass>4239</mass>
 		<reclat>32.1</reclat>
 		<reclong>71.8</reclong>
 		<GeoLocation>(32.1, 71.8)</GeoLocation>
@@ -58,7 +58,7 @@
 		<name>Souza</name>
 		<id>10007</id>
 		<recclass>LL3-6</recclass>
-		<mass (g)>910</mass (g)>
+		<mass>910</mass>
 		<reclat>44.83333</reclat>
 		<reclong>95.16667</reclong>
 		<GeoLocation>(44.83333, 95.16667)</GeoLocation>
@@ -67,7 +67,7 @@
 		<name>Toler</name>
 		<id>10008</id>
 		<recclass>H5</recclass>
-		<mass (g)>30000</mass (g)>
+		<mass>30000</mass>
 		<reclat>44.21667</reclat>
 		<reclong>0.61667</reclong>
 		<GeoLocation>(44.21667, 0.61667)</GeoLocation>
@@ -76,7 +76,7 @@
 		<name>Hachey</name>
 		<id>10009</id>
 		<recclass>L6</recclass>
-		<mass (g)>1620</mass (g)>
+		<mass>1620</mass>
 		<reclat>-31.6</reclat>
 		<reclong>-65.23333</reclong>
 		<GeoLocation>(-31.6, -65.23333)</GeoLocation>
@@ -85,7 +85,7 @@
 		<name>Alexander</name>
 		<id>10010</id>
 		<recclass>L</recclass>
-		<mass (g)>1440</mass (g)>
+		<mass>1440</mass>
 		<reclat>-30.86667</reclat>
 		<reclong>-64.55</reclong>
 		<GeoLocation>(-30.86667, -64.55)</GeoLocation>
@@ -94,7 +94,7 @@
 		<name>Nunez</name>
 		<id>10011</id>
 		<recclass>Diogenite-pm</recclass>
-		<mass (g)>1000</mass (g)>
+		<mass>1000</mass>
 		<reclat>16.39806</reclat>
 		<reclong>-9.57028</reclong>
 		<GeoLocation>(16.39806, -9.57028)</GeoLocation>
@@ -103,7 +103,7 @@
 		<name>Chester</name>
 		<id>10012</id>
 		<recclass>L6</recclass>
-		<mass (g)>24000</mass (g)>
+		<mass>24000</mass>
 		<reclat>19.08333</reclat>
 		<reclong>8.38333</reclong>
 		<GeoLocation>(19.08333, 8.38333)</GeoLocation>
@@ -112,7 +112,7 @@
 		<name>Obermeyer</name>
 		<id>10013</id>
 		<recclass>Stone-uncl</recclass>
-		<mass (g)>2700</mass (g)>
+		<mass>2700</mass>
 		<reclat>26.58333</reclat>
 		<reclong>85.56667</reclong>
 		<GeoLocation>(26.58333, 85.56667)</GeoLocation>
@@ -121,7 +121,7 @@
 		<name>Paris</name>
 		<id>10014</id>
 		<recclass>L6</recclass>
-		<mass (g)>779</mass (g)>
+		<mass>779</mass>
 		<reclat>29.51667</reclat>
 		<reclong>35.05</reclong>
 		<GeoLocation>(29.51667, 35.05)</GeoLocation>
@@ -130,7 +130,7 @@
 		<name>Kelly</name>
 		<id>10015</id>
 		<recclass>H4</recclass>
-		<mass (g)>1800</mass (g)>
+		<mass>1800</mass>
 		<reclat>29.71667</reclat>
 		<reclong>77.95</reclong>
 		<GeoLocation>(29.71667, 77.95)</GeoLocation>
@@ -139,7 +139,7 @@
 		<name>Smith</name>
 		<id>10016</id>
 		<recclass>H</recclass>
-		<mass (g)>3000</mass (g)>
+		<mass>3000</mass>
 		<reclat>8.91667</reclat>
 		<reclong>8.43333</reclong>
 		<GeoLocation>(8.91667, 8.43333)</GeoLocation>
@@ -148,7 +148,7 @@
 		<name>Wills</name>
 		<id>10017</id>
 		<recclass>Iron-IVA</recclass>
-		<mass (g)>50000</mass (g)>
+		<mass>50000</mass>
 		<reclat>39.91667</reclat>
 		<reclong>42.81667</reclong>
 		<GeoLocation>(39.91667, 42.81667)</GeoLocation>
@@ -157,7 +157,7 @@
 		<name>Becker</name>
 		<id>10018</id>
 		<recclass>CR2-an</recclass>
-		<mass (g)>160</mass (g)>
+		<mass>160</mass>
 		<reclat>24.41667</reclat>
 		<reclong>39.51667</reclong>
 		<GeoLocation>(24.41667, 39.51667)</GeoLocation>
@@ -166,7 +166,7 @@
 		<name>Ray</name>
 		<id>10019</id>
 		<recclass>LL5</recclass>
-		<mass (g)>700</mass (g)>
+		<mass>700</mass>
 		<reclat>13.66033</reclat>
 		<reclong>28.96</reclong>
 		<GeoLocation>(13.66033, 28.96)</GeoLocation>
@@ -175,7 +175,7 @@
 		<name>Obrien</name>
 		<id>10020</id>
 		<recclass>CI1</recclass>
-		<mass (g)>6000</mass (g)>
+		<mass>6000</mass>
 		<reclat>44.11667</reclat>
 		<reclong>4.08333</reclong>
 		<GeoLocation>(44.11667, 4.08333)</GeoLocation>
@@ -184,7 +184,7 @@
 		<name>Green</name>
 		<id>10021</id>
 		<recclass>L/LL4</recclass>
-		<mass (g)>2000</mass (g)>
+		<mass>2000</mass>
 		<reclat>44.65</reclat>
 		<reclong>11.01667</reclong>
 		<GeoLocation>(44.65, 11.01667)</GeoLocation>
@@ -193,7 +193,7 @@
 		<name>Bell</name>
 		<id>10022</id>
 		<recclass>L</recclass>
-		<mass (g)>625</mass (g)>
+		<mass>625</mass>
 		<reclat>2</reclat>
 		<reclong>22.66667</reclong>
 		<GeoLocation>(2.0, 22.66667)</GeoLocation>
@@ -202,7 +202,7 @@
 		<name>Guillaume</name>
 		<id>10023</id>
 		<recclass>Eucrite-mmict</recclass>
-		<mass (g)>252</mass (g)>
+		<mass>252</mass>
 		<reclat>45.82133</reclat>
 		<reclong>6.01533</reclong>
 		<GeoLocation>(45.82133, 6.01533)</GeoLocation>
@@ -211,7 +211,7 @@
 		<name>Bautista</name>
 		<id>10024</id>
 		<recclass>LL5</recclass>
-		<mass (g)>700</mass (g)>
+		<mass>700</mass>
 		<reclat>51.78333</reclat>
 		<reclong>-1.78333</reclong>
 		<GeoLocation>(51.78333, -1.78333)</GeoLocation>
@@ -220,7 +220,7 @@
 		<name>Delgado</name>
 		<id>10025</id>
 		<recclass>L6</recclass>
-		<mass (g)>3200</mass (g)>
+		<mass>3200</mass>
 		<reclat>36.23333</reclat>
 		<reclong>37.13333</reclong>
 		<GeoLocation>(36.23333, 37.13333)</GeoLocation>
@@ -229,7 +229,7 @@
 		<name>Thompson</name>
 		<id>10026</id>
 		<recclass>H5</recclass>
-		<mass (g)>908</mass (g)>
+		<mass>908</mass>
 		<reclat>44.88333</reclat>
 		<reclong>8.75</reclong>
 		<GeoLocation>(44.88333, 8.75)</GeoLocation>
@@ -238,7 +238,7 @@
 		<name>Fritter</name>
 		<id>10027</id>
 		<recclass>H4</recclass>
-		<mass (g)>9251</mass (g)>
+		<mass>9251</mass>
 		<reclat>50.95</reclat>
 		<reclong>31.81667</reclong>
 		<GeoLocation>(50.95, 31.81667)</GeoLocation>
@@ -247,7 +247,7 @@
 		<name>Fletcher</name>
 		<id>10028</id>
 		<recclass>L6</recclass>
-		<mass (g)>228000</mass (g)>
+		<mass>228000</mass>
 		<reclat>45.26667</reclat>
 		<reclong>10.15</reclong>
 		<GeoLocation>(45.26667, 10.15)</GeoLocation>
@@ -256,7 +256,7 @@
 		<name>Belin</name>
 		<id>10029</id>
 		<recclass>H5</recclass>
-		<mass (g)>32000</mass (g)>
+		<mass>32000</mass>
 		<reclat>42.53333</reclat>
 		<reclong>-85.88333</reclong>
 		<GeoLocation>(42.53333, -85.88333)</GeoLocation>
@@ -265,7 +265,7 @@
 		<name>Poeschel</name>
 		<id>10030</id>
 		<recclass>CV3</recclass>
-		<mass (g)>2000000</mass (g)>
+		<mass>2000000</mass>
 		<reclat>26.96667</reclat>
 		<reclong>-105.31667</reclong>
 		<GeoLocation>(26.96667, -105.31667)</GeoLocation>
