@@ -81,8 +81,8 @@ calls into a main function:
         return(total_mass / len(a_list_of_dicts) )
 
     def check_hemisphere(latitude, longitude):
-        location = 'Northern' if (lat > 0) else 'Southern'
-        location = f'{location} & Eastern' if (lon > 0) else f'{location} & Western'
+        location = 'Northern' if (latitude > 0) else 'Southern'
+        location = f'{location} & Eastern' if (longitude > 0) else f'{location} & Western'
         return(location)
 
     def main():           # notice the below lines are now indented
