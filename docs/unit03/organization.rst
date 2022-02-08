@@ -41,7 +41,7 @@ Consider the script we wrote in the previous unit for analyzing the Meteorite
 Landings JSON file (called ``ml_data_analysis.py``):
 
 .. code-block:: python3
-   :linenos:
+    :linenos:
 
     import json
 
@@ -69,8 +69,8 @@ To reorganize this code, we would put the file read operation and the two functi
 calls into a main function:
 
 .. code-block:: python3
-   :linenos:
-   :emphasize-lines: 14,23-24
+    :linenos:
+    :emphasize-lines: 14,23-24
 
     import json
 
@@ -109,7 +109,7 @@ Write a new script to import the above code, assuming that above code is saved
 in a file called ``ml_data_analysis.py``:
 
 .. code-block:: python3
-   :linenos:
+    :linenos:
 
     import ml_data_analysis     # assumes it is in this directory, or installed in known location
 
