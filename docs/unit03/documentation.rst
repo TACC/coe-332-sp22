@@ -77,7 +77,7 @@ Let's look at one more example using a real function:
        Returns:
            result (float): The square of the sum of input arguments.
        """
-       result = (num1*num2)**2
+       result = (num1+num2)**2
        return(result)
 
 
