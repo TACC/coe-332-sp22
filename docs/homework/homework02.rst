@@ -1,7 +1,7 @@
 Homework 02
 ===========
 
-**Due Date: Tuesday, Feb 8, by 11:00am CST**
+**Due Date: Thursday, Feb 10, by 11:00am CST**
 
 Return of the JSON
 ------------------
