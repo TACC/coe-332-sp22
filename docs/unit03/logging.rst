@@ -163,7 +163,7 @@ EXERCISE
 ~~~~~~~~
 
 Given the Meteorite Landings analysis script we have been working on, add some
-logging throughout the script, focusing on DEBUG, INFO, and ERROR messages.
+logging throughout the script, focusing on DEBUG and ERROR messages.
 
 .. note::
 
