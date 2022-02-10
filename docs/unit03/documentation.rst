@@ -208,7 +208,7 @@ Let's look at an example using a real function:
 .. code-block:: python3
 
    def add_and_square(num1: float, num2: float) -> float:
-       result = (num1*num2)**2
+       result = (num1+num2)**2
        return(result)
 
 
