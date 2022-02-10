@@ -146,7 +146,7 @@ should the input take?
 
 .. code-block:: python3
 
-   def compute_average_mass( ??? ):
+   def compute_average_mass( xyz ):
        # do some computation
        return(average_mass)
 
@@ -194,7 +194,7 @@ it returns (or prints) a string.
 
 .. code-block:: python3
 
-   def check_hemisphere( ??? )
+   def check_hemisphere( xyz )
        # run through some conditionals
        return(location)
 
