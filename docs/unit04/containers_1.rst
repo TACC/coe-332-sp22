@@ -489,7 +489,8 @@ If all else fails, display the help text:
    [isp02]$ docker --help
    shows all docker options and summaries
 
-../code-block:: console
+
+.. code-block:: console
 
    [isp02]$ docker COMMAND --help
    shows options and summaries for a particular command
