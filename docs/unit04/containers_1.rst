@@ -481,8 +481,18 @@ Essential Docker Command Summary
 +----------------+------------------------------------------------+
 | docker push    | Upload an image to Docker Hub                  |
 +----------------+------------------------------------------------+
-| docker --help  | Show all docker options and summaries          |
-+----------------+------------------------------------------------+
+
+If all else fails, display the help text:
+
+.. code-block:: console
+
+   [isp02]$ docker --help
+   shows all docker options and summaries
+
+../code-block:: console
+
+   [isp02]$ docker COMMAND --help
+   shows options and summaries for a particular command
 
 Additional Resources
 --------------------
