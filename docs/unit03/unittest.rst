@@ -203,6 +203,7 @@ organize them into their own functions.
    :emphasize-lines: 3
 
    from ml_data_analysis import compute_average_mass
+   import pytest
 
    def test_compute_average_mass():
        assert compute_average_mass([{'a': 1}], 'a') == 1
