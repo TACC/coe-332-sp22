@@ -135,7 +135,7 @@ Install Required Packages
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For our Python scripts to work, we need to install two dependencies: Python3 and
-the 'names' package (more on the 'names' package later, let's just assume for
+the 'pytest' package (more on the 'pytest' package later, let's just assume for
 now we need it).
 
 .. code-block:: console
@@ -144,15 +144,14 @@ now we need it).
    ...
    [root@7ad568453e0b /]# python3 --version
    Python 3.6.8
-   [root@7ad568453e0b /]# pip3 install names==0.3.0
-   WARNING: Running pip install with root privileges is generally not a good idea. Try `pip3 install --user` instead.
-   Collecting names==0.3.0
-     Downloading https://files.pythonhosted.org/packages/44/4e/f9cb7ef2df0250f4ba3334fbdabaa94f9c88097089763d8e85ada8092f84/names-0.3.0.tar.gz (789kB)
-       100% |################################| 798kB 1.3MB/s
-   Installing collected packages: names
-     Running setup.py install for names ... done
-   Successfully installed names-0.3.0
-
+   [root@7ad568453e0b /]# pip3 install pytest==7.0.0
+   Collecting pytest==7.0.0
+     ...
+   Installing collected packages: py, pyparsing, packaging, typing-extensions, zipp, 
+     importlib-metadata, pluggy, attrs, iniconfig, tomli, pytest
+   Successfully installed attrs-21.4.0 importlib-metadata-4.8.3 iniconfig-1.1.1 packaging-21.3
+     pluggy-1.0.0 py-1.11.0 pyparsing-3.0.7 pytest-7.0.0 tomli-1.2.3 typing-extensions-4.1.1
+     zipp-3.6.0
 
 .. warning::
 
@@ -245,7 +244,7 @@ The RUN Instruction
 
 We can install updates, install new software, or download code to our image by
 running commands with the RUN instruction. In our case, our only dependencies
-were Python3 and the "names" library. So, we will use a few RUN instructions to
+were Python3 and the "pytest" library. So, we will use a few RUN instructions to
 install them. Keep in mind that the the ``docker build`` process cannot handle
 interactive prompts, so we use the ``-y`` flag with ``yum`` and ``pip3``.
 
@@ -253,7 +252,7 @@ interactive prompts, so we use the ``-y`` flag with ``yum`` and ``pip3``.
 
    RUN yum update -y
    RUN yum install -y python3
-   RUN pip3 install names==0.3.0
+   RUN pip3 install pytest==7.0.0
 
 Each RUN instruction creates an intermediate image (called a 'layer'). Too many
 layers makes the Docker image less performant, and makes building less
@@ -264,7 +263,7 @@ efficient. We can minimize the number of layers by combining RUN instructions:
 
    RUN yum update -y && \
        yum install -y python3 && \
-       pip3 install names==0.3.0
+       pip3 install pytest==7.0.0
 
 .. tip::
 
@@ -326,7 +325,7 @@ The contents of the final Dockerfile should look like:
 
    RUN yum update -y && \
        yum install -y python3 && \
-       pip3 install names==0.3.0
+       pip3 install pytest==7.0.0
 
    COPY ml_data_analysis.py /code/ml_data_analysis.py
 
