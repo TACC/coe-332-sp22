@@ -147,7 +147,7 @@ now we need it).
    [root@7ad568453e0b /]# pip3 install pytest==7.0.0
    Collecting pytest==7.0.0
      ...
-   Installing collected packages: py, pyparsing, packaging, typing-extensions, zipp, 
+   Installing collected packages: py, pyparsing, packaging, typing-extensions, zipp,
      importlib-metadata, pluggy, attrs, iniconfig, tomli, pytest
    Successfully installed attrs-21.4.0 importlib-metadata-4.8.3 iniconfig-1.1.1 packaging-21.3
      pluggy-1.0.0 py-1.11.0 pyparsing-3.0.7 pytest-7.0.0 tomli-1.2.3 typing-extensions-4.1.1
@@ -256,14 +256,18 @@ interactive prompts, so we use the ``-y`` flag with ``yum`` and ``pip3``.
 
 Each RUN instruction creates an intermediate image (called a 'layer'). Too many
 layers makes the Docker image less performant, and makes building less
-efficient. We can minimize the number of layers by combining RUN instructions:
+efficient. We can minimize the number of layers by combining RUN instructions.
+Dependencies that are more likely to change over time (e.g. Python3 libraries)
+still might be better off in in their own RUN instruction in order to save time
+building later on:
 
 
 .. code-block:: dockerfile
 
    RUN yum update -y && \
-       yum install -y python3 && \
-       pip3 install pytest==7.0.0
+       yum install -y python3
+
+   RUN pip3 install pytest==7.0.0
 
 .. tip::
 
@@ -324,8 +328,9 @@ The contents of the final Dockerfile should look like:
    FROM centos:7.9.2009
 
    RUN yum update -y && \
-       yum install -y python3 && \
-       pip3 install pytest==7.0.0
+       yum install -y python3
+
+   RUN pip3 install pytest==7.0.0
 
    COPY ml_data_analysis.py /code/ml_data_analysis.py
 
