@@ -200,7 +200,7 @@ organize them into their own functions.
 
 .. code-block:: python3
    :linenos:
-   :emphasize-lines: 3
+   :emphasize-lines: 11
 
    from ml_data_analysis import compute_average_mass
    import pytest
@@ -223,7 +223,7 @@ organize them into their own functions.
            compute_average_mass([{'a': 1}, {'a': 2}], 'b')             # key not in dicts
 
 
-After adding the above testes, run ``pytest`` again:
+After adding the above tests, run ``pytest`` again:
 
 .. code-block:: console
 
