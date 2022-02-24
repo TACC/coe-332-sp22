@@ -56,7 +56,7 @@ simple target might look like:
 .. code-block:: makefile
 
    images:
-           docker -a | grep wjallen
+           docker images | grep wjallen
 
 Put this text in a file called ``Makefile`` in your current directory, and then
 you simply need to type:
