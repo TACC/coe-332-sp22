@@ -142,7 +142,7 @@ need to modify our command line a little bit to build it:
 
 .. code-block:: console
 
-   [isp02]$ docker build -t username/gen_ml_data:0.1 -f Dockerfile-gen .
+   [isp02]$ docker build -t username/gen_ml_data:1.0 -f Dockerfile-gen .
 
 After the image is successfully built, change directories to a new folder just
 to be sure you are not running the local scripts or looking at the local data.
@@ -153,7 +153,7 @@ Then, test the container as follows:
    [isp02]$ mkdir test
    [isp02]$ cd test
    [isp02]$ ls
-   [isp02]$ docker run --rm username/gen_ml_data:0.1 gen_ml_data.py ml.json
+   [isp02]$ docker run --rm username/gen_ml_data:1.0 gen_ml_data.py ml.json
    Data written to ml.json!
 
 If you list your local files, can you find ``ml.json``? No! This is because
@@ -164,7 +164,7 @@ be captured after the container exists. For example:
 
 .. code-block:: console
 
-   [isp02]$ docker run --rm -v $PWD:/data username/gen_ml_data:0.1 gen_ml_data.py /data/ml.json
+   [isp02]$ docker run --rm -v $PWD:/data username/gen_ml_data:1.0 gen_ml_data.py /data/ml.json
    Data written to ml.json!
 
 .. note::
@@ -187,7 +187,7 @@ that should be used inside the container.
    -rw-r--r--. 1 root root 2098 Feb 21 22:39 ml.json
    [isp02]$ rm ml.json
    rm: remove write-protected regular file ml.json’? y
-   [isp02]$ docker run --rm -v $PWD:/data -u $(id -u):$(id -g) username/gen_ml_data:0.1 gen_ml_data.py /data/ml.json
+   [isp02]$ docker run --rm -v $PWD:/data -u $(id -u):$(id -g) username/gen_ml_data:1.0 gen_ml_data.py /data/ml.json
    Data written to /data/ml.json!
    [isp02]$ ls -l
    total 4
@@ -215,8 +215,8 @@ container looked like the following:
 
 .. code-block:: console
 
-   [isp02]$ docker run --rm -v $PWD:/data -u $(id -u):$(id -g) username/gen_ml_data:0.1 gen_ml_data.py /data/ml.json
-   [isp02]$ docker run --rm -v $PWD:/data username/ml_data_analysis:0.1 ml_data_analysis.py /data/ml.json
+   [isp02]$ docker run --rm -v $PWD:/data -u $(id -u):$(id -g) username/gen_ml_data:1.0 gen_ml_data.py /data/ml.json
+   [isp02]$ docker run --rm -v $PWD:/data username/ml_data_analysis:1.0 ml_data_analysis.py /data/ml.json
 
 The above ``docker run`` commands can be loosely translated into a YAML file.
 Navigate to the folder that contains your Python scripts and Dockerfiles, then
@@ -246,7 +246,7 @@ paste in the following text:
            build:
                context: ./
                dockerfile: ./Dockerfile-gen
-           image: username/gen_ml_data:0.1
+           image: username/gen_ml_data:1.0
            volumes:
                - ./test:/data
            user: "827385:815499"
@@ -255,7 +255,7 @@ paste in the following text:
            build:
                context: ./
                dockerfile: ./Dockerfile-analysis
-           image: username/ml_data_analysis:0.1
+           image: username/ml_data_analysis:1.0
            volumes:
                - ./test:/data
            command: ml_data_analysis.py /data/ml.json
