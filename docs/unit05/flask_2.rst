@@ -9,6 +9,12 @@ functions for our REST API. After going through this module, students should be 
 * Add query parameters to GET requests, and extract their values inside Flask routes
 * Deal with errors from user-supplied input to an API and handle Python exceptions.
 
+.. note:: 
+
+   We will continue to do our work on the isp02 VM. Like last time, it will be helpful for you to 
+   have two SSH terminals open to isp02 at the same time so you can run your flask application in 
+   one terminal and test it in the other.
+
 
 Defining the URLs of Our API
 ----------------------------
@@ -33,7 +39,7 @@ students earning an undergraduate degree for a given year:
 In this case, one collection described by the data is "degrees". So, let's
 define a route, ``/degrees``, that by default returns all of the data points.
 
-**EXERCISE**
+**EXERCISE 1**
 
 Create a new file, ``degrees_api.py`` to hold a Flask application then do the
 following:
@@ -231,7 +237,7 @@ return a content type of aplication/json:
    return flask.jsonify(['a', 'b', 'c'])
 
 
-**EXERCISE 4**
+**EXERCISE 5**
 
 Use the ``flask.jsonify()`` method to update your code from Exercise 1. Then:
 
@@ -274,9 +280,15 @@ Extracting Query Parameters in Flask
 
 Flask makes the query parameters available on the ``request.args`` object, which
 is a "dictionary-like" object. To work with the query parameters supplied on a
-request, you must import the Flask request method (this is different from the
-Python3 ``requests`` library), and use an imbedded method to extract the passed
-query parameter into a variable:
+request, you must import the Flask ``request`` object, and use the ``args.get`` method to 
+extract the passed query parameter into a variable.
+
+.. note::
+
+  The ``flask.request`` object is different from the Python3 ``requests`` library we used to 
+  make http requests. the ``flask.request`` object represents the incoming request that our
+  flask application server has received from the client. 
+
 
 .. code-block:: python3
 
@@ -312,7 +324,7 @@ Let's use this idea to update our ``degrees_api`` to only return the years start
    def degrees():
       d = get_data()
       start = int(request.args.get('start', 0))
-      return jsonify(d)
+      return flask.jsonify(d)
 
 
 Error Handling
@@ -388,7 +400,7 @@ If it is not numeric, we can return an error message to the user.
     if not start.isnumeric():
         return 'Invalid start value; start must be numeric.'
     start = int(start)
-    return jsonify(d[start:])
+    return flask.jsonify(d[start:])
 
 
 Exceptions 
@@ -518,7 +530,7 @@ Here is the full code for our route function with exception handling.
              start = int(start)
          except ValueError:
              return "Invalid start parameter; start must be an integer."
-      return jsonify(d[start:])
+      return flask.jsonify(d[start:])
 
 
 

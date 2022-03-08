@@ -16,8 +16,10 @@ module, students should be able to:
 * Map ports on the ISP server to ports inside a container, and use ``curl`` with the 
   the correct ports to make requests to and generate responses from the microservice.
 
+
 Organize Your App Directory
 ---------------------------
+
 
 First, create a "web" directory, and change directories to it:
 
@@ -215,6 +217,8 @@ Finally, don't forget to stop your running container and remove it.
 
 **EXERCISE**
 
-Containerize your Dr. Moreau apps! Create a route that creates one random
-animal. Post a link to your route to Slack. Have another classmate hit your
-route, and build an animal.
+Containerize your flask meteorite landings server from last week:
+
+  1. Create a Dockerfile for your server.
+  2. Build the image from the Dockerfile. 
+  3. Run the server locally and test the ``/data`` endpoint using curl. 
