@@ -157,7 +157,7 @@ For example:
 
 .. code-block:: console
 
-   [isp02]$ docker run --name "charlies-helloworld-flask-app" -d -p 5050:5000 jstubbs/flask-helloworld:latest
+   [isp02]$ docker run --name "joe-helloworld-flask-app" -d -p 5050:5000 jstubbs/flask-helloworld:latest
 
 The ``-d`` flag detaches your terminal from the running container - i.e. it
 runs the container in the background. The ``-p`` flag maps a port on the ISP
@@ -208,7 +208,7 @@ Finally, don't forget to stop your running container and remove it.
 .. code-block:: console
 
    [isp02]$ docker ps -a | grep jstubbs
-   60be6788d73d   jstubbs/flask-helloworld:latest     "python app.py"   4 minutes ago   Up 4 minutes   0.0.0.0:5050->5000/tcp   charlies-helloworld-flask-app
+   60be6788d73d   jstubbs/flask-helloworld:latest     "python app.py"   4 minutes ago   Up 4 minutes   0.0.0.0:5050->5000/tcp   joe-helloworld-flask-app
    [isp02]$ docker stop 60be6788d73d
    60be6788d73d
    [isp02]$ docker rm 60be6788d73d
