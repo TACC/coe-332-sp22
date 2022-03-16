@@ -1,7 +1,7 @@
 Midterm Project
 ===============
 
-**Due Date: Tuesday, March 22, by 11:00am CST**
+**Due Date: Tuesday, March 22, by 11:00am CDT**
 
 O ISS, Where Art Thou?
 ----------------------
