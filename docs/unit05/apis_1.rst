@@ -9,15 +9,16 @@ this module, students should be able to:
 * List the four most important HTTP verbs and define how they are used in REST APIs.
 * Describe how URLs are used to represent objects in a REST API.
 * Explore API endpoints provided by various websites, e.g., GitHub.
-* Install the Python requests library, and use it to interact with a web API in a Python script, 
+* Install the Python requests library, and use it to interact with a web API in a Python script,
   including making requests and parsing responses.
 
 
 An Application Programming Interface (API) establishes the protocols and methods
-for one piece of a program to communicate with another. APIs are useful for: 
-  (1) Allowing larger software systems to be built from smaller components, 
-  (2) Allowing the same component/code to be used by different systems, and 
-  (3) Insulating consumers from changes to the implementation.
+for one piece of a program to communicate with another. APIs are useful for:
+
+(1) Allowing larger software systems to be built from smaller components,
+(2) Allowing the same component/code to be used by different systems, and
+(3) Insulating consumers from changes to the implementation.
 
 Some examples of APIs:
 
@@ -27,22 +28,22 @@ Some examples of APIs:
 * Web APIs (or “web services”) provide interfaces for computer programs to
   communicate over the internet.
 
-While a User Interface connects humans to computer programs, an API is an interface 
-that connects one piece of software to another. 
+While a User Interface connects humans to computer programs, an API is an interface
+that connects one piece of software to another.
 
 APIs:
 
-  (1) Provide functionality to external software in the form of a contract that specifies 
+  (1) Provide functionality to external software in the form of a contract that specifies
       the inputs that the consuming software must provide and the outputs that the API
       will produce from the inputs.
-  (2) Conceal the implementation of this functionality from the consuming software so 
+  (2) Conceal the implementation of this functionality from the consuming software so
       that changes can be made to the implementation without impacting consumers.
-  (3) Provide errors when the consuming software doesn't fulfill the contract of the API or when 
-      unexpected circumstances are encountered. 
+  (3) Provide errors when the consuming software doesn't fulfill the contract of the API or when
+      unexpected circumstances are encountered.
 
 
-We have already been working with APIs. For example, the Python ``json`` library 
-presents us with an API for working with JSON data. 
+We have already been working with APIs. For example, the Python ``json`` library
+presents us with an API for working with JSON data.
 
 .. code-block:: python3
 
@@ -51,7 +52,7 @@ presents us with an API for working with JSON data.
     ['JSONDecodeError',
     'JSONDecoder',
     'JSONEncoder',
-    . . . 
+    . . .
     'codecs',
     'decoder',
     'detect_encoding',
@@ -62,7 +63,7 @@ presents us with an API for working with JSON data.
     'loads',
     'scanner']
 
-We use ``json.dumps()`` to convert Python objects to JSON (string) data and we use 
+We use ``json.dumps()`` to convert Python objects to JSON (string) data and we use
 ``json.loads()`` to convert JSON strings to Python objects.
 
 .. code-block:: python3
@@ -82,7 +83,7 @@ contract, we might say something like:
   * ``json.loads()`` -- This function accepts a single input (string, bytes or bytes array) representing
     a valid JSON document and returns the equivalent Python object.
   * It will raise a ``JSONDecodeError`` if the input is not a valid JSON document.
-  * ``json.dumps()`` -- This function accepts a single input (a Python object) and serializes 
+  * ``json.dumps()`` -- This function accepts a single input (a Python object) and serializes
     it to a string. The Python object must be JSON serializable.
   * It will raise a ``TypeError`` if the input is not JSON serializable.
 
@@ -91,13 +92,13 @@ Web APIs
 
 In this course, we will be building Web APIs or HTTP APIs. These are interfaces
 that are exposed over HTTP, allowing them to be consumed by software running on different
-machines. 
+machines.
 
 There are a number of advantages to Web-based APIs
 that we will use in this class:
 
 * A Web API can be made accessible to any computer or application that can access
-  the public internet. Alternatively, a Web API can be restricted to a private network. 
+  the public internet. Alternatively, a Web API can be restricted to a private network.
 * No software installation is required on the client's side to consume a web API.
 * Web APIs can change their implementation without clients knowing (or caring).
 * Virtually every modern programming language provides one or more libraries for
@@ -151,7 +152,7 @@ happened:
 
   (1) Your browser made an HTTP GET request to https://github.com.
   (2) A GitHub server received the request from your browser, formulated a response message
-      containing the data (in HTML format) of your home page, with a 200 response code 
+      containing the data (in HTML format) of your home page, with a 200 response code
       to indicate success.
   (3) Your browser received the response message from the GitHub server, and determined that
       the request was successful, due to the 200 response code.
@@ -189,11 +190,11 @@ responses.
 The basic idea with REST is to associate objects in the application domain with URLs,
 and to use HTTP verbs to represent the actions we want to take on the objects.
 A REST API has a **base URL** from which all other URLs in
-that API are formed. For example, the base URL for the GitHub REST API which will look 
+that API are formed. For example, the base URL for the GitHub REST API which will look
 at in more detail momentarily is ``https://api.github.com/``.
 
-   
-The other URLS in the API are then "collections", typically represented by a plural noun, 
+
+The other URLS in the API are then "collections", typically represented by a plural noun,
 following the base URL; e.g.:
 
 .. code-block:: console
@@ -229,7 +230,7 @@ on the resources:
 * ``PUT`` - replace an item in a collection with the description in the message
 * ``DELETE`` - delete an item in a collection
 
-Thus, 
+Thus,
 
 * GET ``<base_url>/users``  would list all users.
 * POST ``<base_url>/users`` would create a new user.
@@ -240,7 +241,7 @@ API is typically comprised of many endpoints.
 
 Note that not all HTTP verbs make sense for all URLs. For example, an API would probably not
 include a PUT ``<base_url>/users`` endpoint, because semantically, that would mean updating
-the entire list of users. 
+the entire list of users.
 
 Response messages often make use of some data serialization format standard such
 as JSON, CSV or XML.
@@ -327,13 +328,13 @@ You will see something like this:
     "user_search_url": "https://api.github.com/search/users?q={query}{&page,per_page,sort,order}"
   }
 
-This should look familiar -- it's a JSON document, and it describes various collections of 
+This should look familiar -- it's a JSON document, and it describes various collections of
 endpoints in the GitHub API. For example, we see:
 
   * ``"events_url": "https://api.github.com/events",`` -- Work with GitHub events
   * ``"organization_url": "https://api.github.com/orgs/{org}",`` -- Work with GitHub orgs
   * ``"repository_url": "https://api.github.com/repos/{owner}/{repo}",`` -- Work with GitHub repos
-  
+
 Many of the endpoints within the GitHub API require *authentication*, i.e., that the requesting
 application prove its identity -- we'll ignore this topic for now and just work with the
 endpoints that do not require authentication.
@@ -356,7 +357,7 @@ as that is the organization we are interested in.
 Since we want to retrieve (or list) information about the TACC organization, the HTTP verb
 we want to use is GET.
 
-We can use the browser to make this request, as before. If we enter 
+We can use the browser to make this request, as before. If we enter
 ``https://api.github.com/orgs/tacc`` into the URL bar, we should see:
 
 .. code-block:: console
