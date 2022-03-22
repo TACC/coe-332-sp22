@@ -1,6 +1,6 @@
 Advanced Flask
 ==============
-We continue using Flask in this module with a look at more complex endpoints and data retrieval 
+We continue using Flask in this module with a look at more complex endpoints and data retrieval
 functions for our REST API. After going through this module, students should be able to:
 
 * Identify valid and invalid Flask route return types
@@ -9,10 +9,10 @@ functions for our REST API. After going through this module, students should be 
 * Add query parameters to GET requests, and extract their values inside Flask routes
 * Deal with errors from user-supplied input to an API and handle Python exceptions.
 
-.. note:: 
+.. note::
 
-   We will continue to do our work on the isp02 VM. Like last time, it will be helpful for you to 
-   have two SSH terminals open to isp02 at the same time so you can run your flask application in 
+   We will continue to do our work on the isp02 VM. Like last time, it will be helpful for you to
+   have two SSH terminals open to isp02 at the same time so you can run your flask application in
    one terminal and test it in the other.
 
 
@@ -44,20 +44,20 @@ define a route, ``/degrees``, that by default returns all of the data points.
 Create a new file, ``degrees_api.py`` to hold a Flask application then do the
 following:
 
-    1) Import the Flask class and instantiate a Flask application 
+    1) Import the Flask class and instantiate a Flask application
     object.
 
     2) Add code so that the Flask server is started when this file is executed
     directly by the Python interpreter.
 
-    3) Copy the ``get_data()`` method above into the application 
+    3) Copy the ``get_data()`` method above into the application
     script.
 
     4) Add a route (``/degrees``) which responds to the HTTP ``GET`` request and
-    returns the complete list of data returned by ``get_data()`` as a Python string. **Hint:** 
-    You won't 
+    returns the complete list of data returned by ``get_data()`` as a Python string. **Hint:**
+    You won't
     be able to return a Python list directly from your route function -- consider
-    casting the list to a string using the ``str()`` function. 
+    casting the list to a string using the ``str()`` function.
 
 In a separate Terminal use ``curl`` to test out your new route. Does it work as
 expected?
@@ -156,15 +156,15 @@ returned on a response from our flask server. Let's try it.
 
 **EXERCISE 4**
 
-  1) Use ``curl`` to make a GET request to your ``/degrees`` endpoint 
-  and pass the ``-v`` (for "verbose") option. This will show you additional information, 
+  1) Use ``curl`` to make a GET request to your ``/degrees`` endpoint
+  and pass the ``-v`` (for "verbose") option. This will show you additional information,
   including the headers. Note that with ``-v``, curl shows headers on both the request and
   the response. Request headers are lines that start with a ``>`` while response headers are
   lines that start with a ``<``.
-  
+
   2). Use ``curl`` again to make the same request, but this time pass the ``--head``
-  option instead of the ``-v``; this will show you **only** the headers being 
-  returned in the response. 
+  option instead of the ``-v``; this will show you **only** the headers being
+  returned in the response.
 
   3) Inside a python shell, use ``requests`` to make the same GET request to your ``/degrees``
   endpoint, and capture the result in a variable, ``r``. Inspect the ``r.header`` attribute.
@@ -184,7 +184,7 @@ returned on a response from our flask server. Let's try it.
    > User-Agent: curl/7.29.0
    > Host: localhost:5000
    > Accept: */*
-   > 
+   >
    * HTTP 1.0, assume close after body
    < HTTP/1.0 200 OK
    < Content-Type: text/html; charset=utf-8
@@ -259,7 +259,7 @@ separated by ``&`` characters; for example, the following request to a hypotheti
 
       GET https://api.example.com/degrees?limit=3&offset=2
 
-passes two query parameters: ``limit=3`` and ``offset=2``. Note that the URL path in 
+passes two query parameters: ``limit=3`` and ``offset=2``. Note that the URL path in
 the example above is still ``/degrees``; that is, the ``?`` character terminates the URL
 path, and any characters that follow create the query parameter set for the request.
 
@@ -280,14 +280,14 @@ Extracting Query Parameters in Flask
 
 Flask makes the query parameters available on the ``request.args`` object, which
 is a "dictionary-like" object. To work with the query parameters supplied on a
-request, you must import the Flask ``request`` object, and use the ``args.get`` method to 
+request, you must import the Flask ``request`` object, and use the ``args.get`` method to
 extract the passed query parameter into a variable.
 
 .. note::
 
-  The ``flask.request`` object is different from the Python3 ``requests`` library we used to 
+  The ``flask.request`` object is different from the Python3 ``requests`` library we used to
   make http requests. the ``flask.request`` object represents the incoming request that our
-  flask application server has received from the client. 
+  flask application server has received from the client.
 
 
 .. code-block:: python3
@@ -315,7 +315,7 @@ passed, or it will be ``None`` otherwise:
 
 
 Let's use this idea to update our ``degrees_api`` to only return the years starting from the
-``start`` query parameter year, if that parameter is provided. 
+``start`` query parameter year, if that parameter is provided.
 
 
 .. code-block:: python
@@ -341,7 +341,6 @@ query parameter that isn't an integer? We can test it ourselves.
 If we try this we get some nasty stuff that ends with a traceback, like this:
 
 .. code-block:: console
-   # ....
 
    Traceback (most recent call last):
    File "/home/jstubbs/.local/lib/python3.6/site-packages/flask/app.py", line 2091, in __call__
@@ -365,7 +364,7 @@ Checking User Input
 ~~~~~~~~~~~~~~~~~~~
 
 If we get a request like this, in the best case, the user didn't understand what kind of data to put
-in the ``start`` query parameter; in the worst case, they were intentionally trying to send our 
+in the ``start`` query parameter; in the worst case, they were intentionally trying to send our
 program bad data to break it. We should always be very careful with user-supplied data and make sure
 it contains the kind of data we expect.
 
@@ -373,7 +372,7 @@ So, what is it we expect from the ``start`` query parameter? At a minimum, it ne
 of integer data, because we are casting it to the ``int`` type. Therefore, at a minimum, we should
 check if it is an integer.
 
-We can use the Python ``isnumeric()`` method on a Python string to test whether a string 
+We can use the Python ``isnumeric()`` method on a Python string to test whether a string
 contains non-negative integer data.
 
 Let's try some examples in the Python shell:
@@ -403,18 +402,18 @@ If it is not numeric, we can return an error message to the user.
     return flask.jsonify(d[start:])
 
 
-Exceptions 
+Exceptions
 ~~~~~~~~~~
 Using the ``isnumeric()`` function allowed us to check for invalid user input in the specific
-case above, but Python provides a far more general and powerful error handling capability, called 
-Exceptions, that we will discuss next. 
+case above, but Python provides a far more general and powerful error handling capability, called
+Exceptions, that we will discuss next.
 
 In Python, exceptions are the mechanism one typically uses to communicate and deal with run-time
-errors. Exceptions are different from syntax errors where, in general, there is no hope of the code 
-working. Exceptions occur with statements that are syntactically correct but nonetheless generate 
+errors. Exceptions are different from syntax errors where, in general, there is no hope of the code
+working. Exceptions occur with statements that are syntactically correct but nonetheless generate
 some kind of error at runtime. Typically, the program can recover from these types of errors.
 
-In Python, exceptions are instances of the class ``Exception`` or a child class. We say that a 
+In Python, exceptions are instances of the class ``Exception`` or a child class. We say that a
 statement *generates* or *raises* an exception.
 
 Some common situations that generate exceptions are:
@@ -428,11 +427,11 @@ Some common situations that generate exceptions are:
 * Trying to use an object of the wrong type in a function raises a ``TypeError`` (for example,
   trying to call ``json.dumps()`` with an object that is not of type ``str``.)
 
-* Trying to use an object with the wrong kind of value in a function raises a ``ValueError`` 
+* Trying to use an object with the wrong kind of value in a function raises a ``ValueError``
   (for example, calling ``int('abc')``.)
 
-* Trying to access a non-existent attribute on an object raises an ``AttributeError`` (a special 
-  case is accessing a null/uninitialized object, resulting in the dreaded 
+* Trying to access a non-existent attribute on an object raises an ``AttributeError`` (a special
+  case is accessing a null/uninitialized object, resulting in the dreaded
   ``AttributeError: 'NoneType' object has no attribute 'foo'`` error.)
 
 
@@ -440,8 +439,8 @@ Some common situations that generate exceptions are:
 Handling Exceptions
 ~~~~~~~~~~~~~~~~~~~
 
-If a statement we execute in our code, such as a call to the ``int()`` function to cast an object 
-to an integer, could raise an exception, we can handle the exception by using the ``try...except...`` 
+If a statement we execute in our code, such as a call to the ``int()`` function to cast an object
+to an integer, could raise an exception, we can handle the exception by using the ``try...except...``
 statement. It works like this:
 
 .. code-block:: python
@@ -453,27 +452,27 @@ statement. It works like this:
         # do something if the exception was of type ExceptionType1...
     except ExceptionType2 as e:
         # do something if the exception was of type ExceptionType2...
-    
+
     # . . . additional except blocks . . .
-     
+
     finally:
         # do something regardless of whether an exception was raised or not.
 
 A few notes:
 
-* If a statement(s) within the ``try`` block does not raise an exception, the ``except`` blocks are 
+* If a statement(s) within the ``try`` block does not raise an exception, the ``except`` blocks are
   skipped.
-* If a statement within the ``try`` block does raise an exception, Python looks at the 
-  ``except`` blocks for the first one matching the type of the exception raised and executed that 
+* If a statement within the ``try`` block does raise an exception, Python looks at the
+  ``except`` blocks for the first one matching the type of the exception raised and executed that
   block of code.
 * The ``finally`` block is optional but it executes regardless of whether an exception was raised
-  by a statement in the 
+  by a statement in the
 * The ``as e`` clause puts the exception object into a variable (``e``) that we can use.
 * The use of ``e`` was arbitrary; we could choose to use any other valid variable identifier.
 * We can also leave off the ``as e`` part altogether if we don't need to reference the exception
   object in our code.
 
-Here's how we could deal with an invalid ``start`` parameter provided by the user 
+Here's how we could deal with an invalid ``start`` parameter provided by the user
 using exceptions:
 
 .. code-block:: python
@@ -483,20 +482,20 @@ using exceptions:
     except ValueError:
         # return some kind of error message...
 
-    # at this point in the code, we know the int(start) "worked" and so we are safe 
+    # at this point in the code, we know the int(start) "worked" and so we are safe
     # to use it as an integer..
-   
+
 
 Exception Hierarchy
 ~~~~~~~~~~~~~~~~~~~
 
-Exceptions form a class hierarchy with the base ``Exception`` class being at the root. So, 
-for example: 
+Exceptions form a class hierarchy with the base ``Exception`` class being at the root. So,
+for example:
 
-* ``FileNotFoundError`` is a type of ``OSError`` as is ``PermissionError``, which is raised in case 
+* ``FileNotFoundError`` is a type of ``OSError`` as is ``PermissionError``, which is raised in case
   the attempted file access is not permitted by the OS due to lack of permissions.
 * ``ZeroDivisionError`` and ``OverflowError`` are instances of ``ArithmeticError``, the latter
-  being raised whenever the result of a calculation exceeds the limits of what can be represented 
+  being raised whenever the result of a calculation exceeds the limits of what can be represented
   (try running ``2.**5000`` in a Python shell).
 * Every built-in Python exception is of type ``Exception``.
 
@@ -509,15 +508,15 @@ Therefore, we could use any of the following to deal with a ``FileNotFoundError`
 
 Here are some best practices to keep in mind for handling exceptions:
 
-* Put a minimum number of statements within a ``try`` block so that you can detect which 
+* Put a minimum number of statements within a ``try`` block so that you can detect which
   statement caused the error.
-* Similarly, put the most specific exception type in the ``except`` block that is appropriate 
-  so that you can detect exactly what went wrong. Using ``except Exception...`` should 
-  be seen as a last resort 
+* Similarly, put the most specific exception type in the ``except`` block that is appropriate
+  so that you can detect exactly what went wrong. Using ``except Exception...`` should
+  be seen as a last resort
   because an ``Exception`` could be any kind of error.
 
 
-Here is the full code for our route function with exception handling. 
+Here is the full code for our route function with exception handling.
 
 .. code-block:: python
 
