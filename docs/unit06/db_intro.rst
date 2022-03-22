@@ -203,6 +203,12 @@ To use Redis on the class VM (ISP), we must have an instance of the Redis server
 running. For demonstration purposes, we will all share the same instance of
 Redis server on the same port (6379) running in a docker container.
 
+.. note:: 
+
+   Please **do not** run the following command on your own. We only want to run one 
+   Redis container for the whole class at this time. We are including it here for 
+   documentation purposes only. 
+
 
 .. code-block:: console
 
