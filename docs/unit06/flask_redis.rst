@@ -2,8 +2,9 @@ Flask and Redis
 ===============
 
 Up to this point, we have been interacting with a shared Redis database instance
-directly on the class ISP server. Next, we will each containerize an instance of
-Redis, figure out how to interact with it by forwarding the port, and connect it
+running on the class ISP server. Here, we will each work with our own containerized instance of
+Redis, figure out how to interact with it by forwarding the port, updat the command and 
+mount a host directory to persist data, and connect it
 to our Flask app. After going through this module, students should be able to:
 
   * Start a Redis container, connecting the appropriate inside port to a port on isp02.
@@ -83,8 +84,8 @@ If we exit our Python shell and then go into a new Python shell and connect to R
     >>> rd.get('k')
     b'v'
 
-Great! Redis has persisted our data across Python sessions. But what happens if we shut down the
-Redis container itself?
+Great! Redis has persisted our data across Python sessions. That was one of our goals. 
+But what happens if we shut down the Redis container itself?
 
 Let's find out by killing our Redis container and starting a new one.
 
@@ -131,6 +132,7 @@ is
     [isp02]$ docker run -v <host_path>:<container_path>:<mode> ...*additional docker run args*...
 
 where: 
+
   * ``<host_path>`` and ``<container_path>`` are absolute paths in the host (respectively, container)
     file system and 
   * ``<mode>`` can take the value of ``ro`` for a read-only mount and ``rw`` for a read-write mount.
@@ -141,7 +143,7 @@ It is important to keep the following in mind when using bind mounts:
 
   * If the container image originally contained a file or directory at the ``<container_path>`` 
     these will be replaced entirely by the contents of ``<host_path>``.
-  * If the container image did not container contents at ``<container_path>`` the mount will still 
+  * If the container image did not contain contents at ``<container_path>`` the mount will still 
     succeed and simply create a new file/directory at the path.
   * If the ``<mode>`` is read-write (the default), any changes made by the running container will be 
     reflected on the host file system. Note that the process running in the container still must have
@@ -165,6 +167,83 @@ that it writes its dataset to the file system periodically. The full syntax is:
 
 where ``<frequency>`` is an integer, in seconds. We'll instruct Redis to write its data to the file 
 system every second, and we'll keep just one backup. 
+
+Entrypoints and Commands in Docker Containers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Let's take a moment to revisit the difference between an entrypoint and a 
+command in a Docker container image. When executing a container from an image, Docker uses both 
+an ``entrypoint`` and an (optional) ``command`` to start the container. It combines the two using 
+concatenation, with ``entrypoint`` first, followed by ``command``. 
+
+When we use ``docker run`` to create and start a container from an existing image, we can choose to 
+override either the command or the entrypoint that may have been specified in the image. Any string 
+``<string>`` passed after the ``<image>`` in the statement: 
+
+.. code-block:: console
+
+  $ docker run <options> <image> <string>
+
+will override the ``command`` specified in the image, but the original entrypoint set for the image 
+will still be used. 
+
+A common pattern when building Docker images is to set the ``entrypoint`` to the primary program, 
+and set the ``command`` to a default set of options or parameters to the program. 
+
+Consider the following simple example:
+
+.. code-block:: console
+
+  # Dockerfile
+  FROM ubuntu
+  ENTRYPOINT ["ls"]
+  CMD ["-l"]
+
+If I built and tagged this image as ``jstubbs/ls``, then 
+
+.. code-block:: console
+
+  # run with the default command, equivalent to "ls -l" 
+  $ docker run --rm -it jstubbs/ls
+    total 48
+    lrwxrwxrwx   1 root root    7 Jan  5 16:47 bin -> usr/bin
+    drwxr-xr-x   2 root root 4096 Apr 15  2020 boot
+    drwxr-xr-x   5 root root  360 Mar 23 18:37 dev
+    drwxr-xr-x   1 root root 4096 Mar 23 18:37 etc
+    drwxr-xr-x   2 root root 4096 Apr 15  2020 home
+    . . .
+
+  # override the command, but keep the entrypoint; equivalent to running "ls -a" (note the lack of "-l")
+  $ docker run --rm -it jstubbs/ls -a
+    .   .dockerenv	boot  etc   lib    lib64   media  opt	root  sbin  sys  usr
+    ..  bin		dev   home  lib32  libx32  mnt	  proc	run   srv   tmp  var
+
+
+  # override the command, specifying a different directory 
+  $ docker run --rm -it jstubbs/ls /root -la
+    total 16
+    drwx------ 2 root root 4096 Jan  5 16:50 .
+    drwxr-xr-x 1 root root 4096 Mar 23 18:38 ..
+    -rw-r--r-- 1 root root 3106 Dec  5  2019 .bashrc
+    -rw-r--r-- 1 root root  161 Dec  5  2019 .profile
+
+
+Modifying the Command in the Redis Container
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The official `redis <https://hub.docker.com/_/redis>`_ container image provides an entrypoint which 
+starts the redis server (check out the `Dockerfile <https://github.com/docker-library/redis/blob/15ed0a0c1cb60c5193db45d8b59a8707507be307/6.2/Dockerfile>`_ 
+if you are interested.).
+
+Since the ``save`` option is a parameter, we can set it when running the redis server container 
+by simply appending it to the end of the ``docker run`` command; that is, 
+
+.. code-block:: console
+  
+  $ docker run <options> redis:6 --save <options>
+
+
+Combining ``--save`` and Mounts for a Complete Solution
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 With ``save``, we can instruct Redis to write the data to the file system, but we still need to 
 save the files across container executions. That's where the bind mount comes in. But how do we know 
@@ -217,6 +296,10 @@ generating the client:
 
 Exercise 2
 ~~~~~~~~~~
+
+.. note::
+
+  This exercise will be part of the next home work assignment. 
 
 In the last module, we wrote program to read the Meteorite Landings data (i.e., the 
 ``Meteorite_Landings.json`` file from Unit 4) into Redis. In this exercise, let's turn this program 
