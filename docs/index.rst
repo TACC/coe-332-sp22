@@ -34,6 +34,7 @@ provide a web-accessible interface to their system.
    homework/homework03.rst
    homework/homework04.rst
    homework/midterm.rst
+   homework/final.rst
 
 
 Additional Resources
