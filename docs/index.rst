@@ -24,6 +24,7 @@ provide a web-accessible interface to their system.
    unit04/overview
    unit05/overview
    unit06/overview
+   unit07/overview
 
 .. toctree::
    :maxdepth: 1
