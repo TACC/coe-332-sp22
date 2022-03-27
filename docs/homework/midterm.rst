@@ -110,7 +110,7 @@ What to Turn In
 
 This Midterm project should be pushed into a standalone repo with a descriptive
 name (not "coe332-midterm"). It should
-not be part into your existing homework repo. A sample Git repository may
+not be put into your existing homework repo. A sample Git repository may
 contain the following after completing the Midterm:
 
 .. code-block:: text
