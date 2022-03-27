@@ -17,10 +17,10 @@ After going through this module, students should be able to:
 What's Our Motivation?
 ----------------------
 
-In this unit, we will being the work to extend our Flask API to enable users to query and analyze data
+In this unit, we will begin the work to extend our Flask API to enable users to query and analyze data
 in our data sets. We want to expose this functionality through our Flask API, but there is an issue:
-the analysis to be performed may take "a long time" to compute, longer than the acceptable time window 
-for an HTTP request/response cycle. We need a way to coordinate the work of computing the analysis 
+the analysis to be performed may take "a long time" to compute, longer than the acceptable time window
+for an HTTP request/response cycle. We need a way to coordinate the work of computing the analysis
 in a separate Python program from our Flask API. The database will play a central role.
 
 Our basic approach will be:
@@ -28,13 +28,13 @@ Our basic approach will be:
 1. Our dataset will be stored in a database.
 2. The user submits a request to a Flask endpoint describing some sort of
    analysis they wish to perform on the data.
-3. We will create a separate Python program to perform the analysis. This program will retrieve the 
-   desired data from the database and store the final results in the database. 
-4. The Flask API will determine the status of the analysis by querying the database, and it will 
+3. We will create a separate Python program to perform the analysis. This program will retrieve the
+   desired data from the database and store the final results in the database.
+4. The Flask API will determine the status of the analysis by querying the database, and it will
    retrieve the final results of the analysis from the database to serve to the user when they are ready.
 
 There are a lot of details to fill in over the course of the rest of the semester, but for now
-we are going to focus on getting data into and out of a database. 
+we are going to focus on getting data into and out of a database.
 
 
 Intro to Databases
@@ -44,8 +44,8 @@ Intro to Databases
 
 * A database is an organized collection of structured information, or data,
   typically stored electronically in a computer system.
-* Databases provide a `query language`, a small, domain-specific language for interacting with the
-  data. The query language is not like a typical programming language such as Python of C++; you 
+* Databases provide a **query language** - a small, domain-specific language for interacting with the
+  data. The query language is not like a typical programming language such as Python or C++; you
   cannot create large, complex programs with it. Instead, it is intended to allow for easy, efficient
   access to the data.
 
@@ -65,82 +65,82 @@ Intro to Databases
 * With files, our Flask API would have to implement all the structure in the data.
 
 
-Databases sometimes get classified into two broad categories: SQL databases (also called 
+Databases sometimes get classified into two broad categories: SQL databases (also called
 relational databases) and NoSQL databases.
 
 SQL Databases
 -------------
 Structured Query Language (SQL) is a language for managing structured or relational data, where
 certain objects in the dataset are related to other objects in a formally or mathematically precise
-way. SQL is the language used when working with a relational database. You will often see SQL 
+way. SQL is the language used when working with a relational database. You will often see SQL
 database technologies referred to as Relational Database Management Systems (RDBMS).
 
 The SQL language is governed by an ISO standard, and relational databases are among the most popular
-databases in use today. SQL was originally based on a strong, theoretical framework called the 
-Relational Model (and related concepts). However, today's SQL has departed significantly from that 
-formal framework. 
+databases in use today. SQL was originally based on a strong, theoretical framework called the
+Relational Model (and related concepts). However, today's SQL has departed significantly from that
+formal framework.
 
 Popular open-source RBDMS include:
 
-  * MySQL
-  * Postgres
-  * Sqlite
+* MySQL
+* Postgres
+* Sqlite
 
 
 NoSQL Databases
 ----------------
 
-As the name implies, a NoSQL database is simply a database that does not use SQL. 
+As the name implies, a NoSQL database is simply a database that does not use SQL.
 There are many different types of NoSQL databases, including:
-  * Time series databases
-  * Document stores 
-  * Graph databases
-  * Simple key-value stores (like the one we will use in this class). 
+
+* Time series databases
+* Document stores
+* Graph databases
+* Simple key-value stores (like the one we will use in this class)
 
 In some ways, it is easier to say what a NoSQL database isn't than what it is; some of the key attributes
 include:
 
 * NoSQL databases do **NOT** use tables (data structured using rows and columns)
-  connected through relations.
-* NoSQL databases store data in "collections", "logical databases", or similar containers. 
+  connected through relations
+* NoSQL databases store data in "collections", "logical databases", or similar containers
 * NoSQL databases often allow for missing or different attributes on objects in the same collection
-* Objects in one collection do not relate or link to objects in another
-  collection
+* Objects in one collection do not relate or link to objects in another collection
 * For example, the objects themselves could be JSON objects without a pre-defined schema
 
 
 **SQL vs NoSQL**
 
-Comparing SQL and NoSQL is an apples to oranges comparison. 
+Comparing SQL and NoSQL is an apples to oranges comparison.
 
 * Both SQL and NoSQL databases have advantages and disadvantages.
-* The *primary* deciding factor should be the *shape* of the data and the requirements on the 
+* The *primary* deciding factor should be the *shape* of the data and the requirements on the
   integrity of the data. In practice, many other considerations could come into play, such as what
-  expertise the project team has. 
+  expertise the project team has.
 * Also consider how the data may change over time, and how important is the
   relationship between the different types of data being stored.
 * SQL databases "enforce" relationships between data types, including one-to-one, one-to-many,
   and many-to-many. When the integrity of the data is important, SQL databases are a good choice.
 * In many NoSQL databases, the relationship enforcement must be programmed into the application. This
-  can be error-prone add can increase the development effort needed to build the application. On the 
+  can be error-prone add can increase the development effort needed to build the application. On the
   other hand, this can allow the
-  database to be used for use cases where relationship enforcement is not possible. 
+  database to be used for use cases where relationship enforcement is not possible.
 * SQL databases historically cannot scale to the "largest" quantities of data because of
-  the ACID (Atomicity, Consistency, Isolation, Durability) guarantees they make (though this is an 
+  the ACID (Atomicity, Consistency, Isolation, Durability) guarantees they make (though this is an
   active area of research).
-* NoSQL databases trade ACID guarantees for weaker properties (e.g., "eventual consistency") and 
-  greater scalability. It would be difficult to scale a relational database to contain 
+* NoSQL databases trade ACID guarantees for weaker properties (e.g., "eventual consistency") and
+  greater scalability. It would be difficult to scale a relational database to contain
   the HTML of all websites on the internet or even all tweets ever published.
 
 For the projects in this class, we are going to use Redis, a simple (NoSQL) "data structure" store.
 There are a few reasons for this choice:
 
-  * We need a flexible data model, as the structure of the data we will store in the database will 
-    be changing significantly over the course of the semester. 
-  * We need a tool that is quick to learn and simple to use. This is not a databases course, and
-    learning the SQL language would take significantly more time than we can afford. 
-  * Redis can also easily be used as a task queue, which we will make use of in the asynchronous 
-    programming unit. 
+* We need a flexible data model, as the structure of the data we will store in the database will
+  be changing significantly over the course of the semester.
+* We need a tool that is quick to learn and simple to use. This is not a databases course, and
+  learning the SQL language would take significantly more time than we can afford.
+* Redis can also easily be used as a task queue, which we will make use of in the asynchronous
+  programming unit.
 
 
 Redis
@@ -149,47 +149,53 @@ Redis
 Redis is a very popular NoSQL database and "data structure store" with lots of
 advanced features including:
 
+
 Key-value Store
 ~~~~~~~~~~~~~~~
 
 Redis provides key-value store functionality:
 
-  * The items stored in a Redis database are structured as ``key:value`` objects.
-  * The primary requirement is that the ``key`` be unique across the database.
-  * A single Redis server can support multiple databases, indexed by an integer.
-  * The data itself can be stored as JSON.
+* The items stored in a Redis database are structured as ``key:value`` objects.
+* The primary requirement is that the ``key`` be unique across the database.
+* A single Redis server can support multiple databases, indexed by an integer.
+* The data itself can be stored as JSON.
+
 
 Notes about Keys
 ~~~~~~~~~~~~~~~~
-Redis keys have the following properties/requirements: 
 
-  * Keys are often strings, but they can be any "binary sequence".
-  * Long keys can lead to performance issues.
-  * A format such as ``<object_type>:<object_id>`` is a good practice.
+Redis keys have the following properties/requirements:
+
+* Keys are often strings, but they can be any "binary sequence".
+* Long keys can lead to performance issues.
+* A format such as ``<object_type>:<object_id>`` is a good practice.
 
 
 Notes on Values
 ~~~~~~~~~~~~~~~
 
-  * Values are typed; some of the primary types include:
-    - Binary-safe strings
-    - Lists (sorted collections of strings)
-    - Sets (unsorted, unique collections of strings)
-    - Hashes (maps of fields with associated values; both field and value are type ``string``)
-  * There is no native "JSON" type; to store JSON, one can use an encoding and store
-    the data as a binary-safe string, or one can use a hash and convert the object
-    into and out of JSON.
-  * The basic string type is a "binary-safe" string, meaning it must include an
-    encoding.
+* Values are typed; some of the primary types include:
 
-  - In Python terms, the string is stored and returned as type ``bytes``.
-  - By default, the string will be encoded with UTF-8, but we can specify the
+  * Binary-safe strings
+  * Lists (sorted collections of strings)
+  * Sets (unsorted, unique collections of strings)
+  * Hashes (maps of fields with associated values; both field and value are type ``string``)
+
+* There is no native "JSON" type; to store JSON, one can use an encoding and store
+  the data as a binary-safe string, or one can use a hash and convert the object
+  into and out of JSON.
+* The basic string type is a "binary-safe" string, meaning it must include an
+  encoding.
+
+  * In Python terms, the string is stored and returned as type ``bytes``.
+  * By default, the string will be encoded with UTF-8, but we can specify the
     encoding when storing the string.
-  - Since bytes are returned, it will be our responsibility to decode using the
+  * Since bytes are returned, it will be our responsibility to decode using the
     same encoding.
 
 
-**Hash Maps**
+Hash Maps
+~~~~~~~~~
 
 * Hashes provide another way of storing dictionary-like data in Redis
 * The values of the keys are type ``string``
@@ -203,11 +209,11 @@ To use Redis on the class VM (ISP), we must have an instance of the Redis server
 running. For demonstration purposes, we will all share the same instance of
 Redis server on the same port (6379) running in a docker container.
 
-.. note:: 
+.. note::
 
-   Please **do not** run the following command on your own. We only want to run one 
-   Redis container for the whole class at this time. We are including it here for 
-   documentation purposes only. 
+   Please **do not** run the following command on your own. We only want to run one
+   Redis container for the whole class at this time. We are including it here for
+   documentation purposes only.
 
 
 .. code-block:: console
@@ -268,9 +274,9 @@ Some quick notes:
 
 .. note::
 
-    Since we are sharing a single Redis server for this class, please use the integer associated with 
-    the last one or two digits of your Flask port; i.e., if your Flask port is ``5001``, use ``db=1``, 
-    if your Flask port is ``5023`` use ``db=23``. This will ensure we do not collide with each other. 
+    Since we are sharing a single Redis server for this class, please use the integer associated with
+    the last one or two digits of your Flask port; i.e., if your Flask port is ``5001``, use ``db=1``,
+    if your Flask port is ``5023`` use ``db=23``. This will ensure we do not collide with each other.
 
 
 Working with Redis
@@ -372,8 +378,8 @@ Hashes provide another way of storing dictionary-like data in Redis.
 * Use ``hget()`` to get a single field within a hash or to get all of the fields.
 
 .. code-block:: python3
-   
-   # set multiple fields on a hash 
+
+   # set multiple fields on a hash
    >>> rd.hset('k2', mapping={'name': 'Joe', 'email': 'jstubbs@tacc.utexas.edu'})
 
    # set a single field on a hash
@@ -383,7 +389,7 @@ Hashes provide another way of storing dictionary-like data in Redis.
    >>> rd.hget('k2', 'name')
    b'Joe'
 
-   # get all the fields in the hash 
+   # get all the fields in the hash
    >>> rd.hgetall('k2')
    {b'name': b'Joe', b'email': b'jstubbs@tacc.utexas.edu', b'type': b'instructor'}
 
@@ -404,12 +410,12 @@ Exercise 1
 ~~~~~~~~~~
 
 Save the Meteorite Landings data (i.e., the ``Meteorite_Landings.json`` file from Unit 4) into Redis.
-Each landing data point should be stored as a single Redis object. Think about what data type 
+Each landing data point should be stored as a single Redis object. Think about what data type
 you want to use in Redis for storing the data.
 
 If needed, you can download the JSON file with the following command:
 
-.. code-block:: console 
+.. code-block:: console
 
   $ wget https://raw.githubusercontent.com/tacc/coe-332-sp22/main/docs/unit04/scripts/Meteorite_Landings.json
 
@@ -419,9 +425,9 @@ Exercise 2
 
 Check that you stored the data correctly:
 
-  * Check the total number of keys in your Redis database against the total number of objects in the 
-    JSON file. 
-  * Read all of the landing objects out of Redis and check that each object has the correct fields. 
+* Check the total number of keys in your Redis database against the total number of objects in the
+  JSON file.
+* Read all of the landing objects out of Redis and check that each object has the correct fields.
 
 
 Additional Resources
