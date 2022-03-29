@@ -38,7 +38,8 @@ Users communicate with k8s by making requests to its API. The following steps ou
   It is important to note that most of the time, the k8s API as well as the worker nodes are running on separate machines
   from the machine we use to interact with k8s (i.e., make API requests to it). The machine we use to interact with k8s
   only needs to have the k8s client tools installed, and in fact, as the k9s API is available over HTTP, we don't strictly
-  speaking require the tools -- we could use curl or some other http client -- but the tools make interacting much easier.
+  speaking require the tools -- we could use curl or some other http client -- but the tools make 
+  interacting with the API much easier.
 
 
 Connecting to the TACC Kubernetes Instance
@@ -204,6 +205,13 @@ If all went well and k8s accepted your request, you should see an output like th
 .. code-block:: bash
 
   pod/hello created
+
+
+.. note:: 
+
+  The message ``pod/hello created`` indicates that the description of the pod was valid, that
+  k8s has saved the pod definition in its database and that it is working on starting the pod on the
+  cluster. It does **not** mean the pod is already created/running on the cluster. 
 
 In practice, we won't be creating many ``Pod`` resources directly -- we'll be creating other resources, such as
 ``deployments`` that are made up of pods -- but it is important to understand pods and to be able to work
