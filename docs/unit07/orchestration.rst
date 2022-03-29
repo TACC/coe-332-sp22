@@ -32,7 +32,7 @@ and number of components grows, some systems may encounter additional challenges
  * Scaling -- We may need to start up additional containers for one or more components to handle spikes in load on the
    system, and shut down these additional containers to save resources when the usage spike subsides.
  * CPU and Memory management -- The computers we run on have a fixed amount of CPU and memory, and in some cases, it can
-   be important to ensure that no one container uses too many resources, or to ensure that
+   be important to ensure that no one container uses too many resources.
  * Software version updates -- How do we go from version 1 to version 2 of our software? We may have to update several
    components (or all of them) at once. What if there are multiple containers running for a given component? As we are
    performing the upgrade, is the system offline or can users still use it?

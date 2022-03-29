@@ -431,11 +431,11 @@ We can ask k8s to describe that pod to get more details:
     <... some output omitted ...>
     Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
                      node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
     Events:
-      Type     Reason            Age    From               Message
-      ----     ------            ----   ----               -------
-      Warning  FailedScheduling  4m35s  default-scheduler  persistentvolumeclaim "hello-jstubbs-data" not found
-      Warning  FailedScheduling  4m35s  default-scheduler  persistentvolumeclaim "hello-jstubbs-data" not found
+      Type     Reason            Age   From               Message
+      ----     ------            ----  ----               -------
+      Warning  FailedScheduling  63s   default-scheduler  0/1 nodes are available: 1 persistentvolumeclaim "hello-jstubbs-data" not found.
 
 At the bottom we see the "Events" section contains a clue: persistentvolumeclaim "hello-jstubbs-data" not found.
 
@@ -455,7 +455,7 @@ with your TACC username:
     spec:
       accessModes:
         - ReadWriteOnce
-      storageClassName: rbd
+      storageClassName: nfs
       resources:
         requests:
           storage: 1Gi
@@ -465,9 +465,15 @@ with your TACC username:
   Again, be sure to replace **<username>** with your actual username in the YAML above. 
 
 We will use this file to create a persistent volume claim against the storage that has been set up in the TACC k8s
-cluster. In order to use this storage, you do need to know the storage class (in this case, "rbd", which is the storage
-class for utilizing the Ceph storage system), and how much you want to request (in this case, just 1 Gig), but you
+cluster. In order to use this storage, you do need to know the storage class (in this case, "nfs", which is the storage
+class for utilizing the NFS storage system), and how much you want to request (in this case, just 1 Gig), but you
 don't need to know how the storage was implemented.
+
+.. note::
+
+  Different k8s clusters may offer persistent storage that utilize different storage classes. Within TACC, 
+  we also have k8s clusters that utilize the ``rbd`` storage class, for example. Be sure to check with the
+  k8s administrators to see what storage class(es) might be available.
 
 We create this pvc object with the usual ``kubectl apply`` command:
 
@@ -627,4 +633,5 @@ Additional Resources
 
  * `Kubernetes Deployments Documentation <https://kubernetes.io/docs/concepts/workloads/controllers/deployment/>`_
  * `Persistent Volumes <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`_
+ * `NFS Storage class in k8s <https://kubernetes.io/docs/concepts/storage/storage-classes/#nfs>`_
  * `Ceph RBD Storage class in k8s <https://kubernetes.io/docs/concepts/storage/storage-classes/#ceph-rbd>`_

@@ -17,7 +17,7 @@ At the end of this unit you will:
 
   * Understand container orchestration and the basic Kubernetes architecture.
   * Understand fundamental Kubernetes abstractions, including: ``pod``, ``deployment``, ``persistent volume``, and ``service``.
-  * Write a basic script to deploy your flask application to a Kubernetes cluster in your own private namespace.
+  * Write a set of scripts to deploy your flask application to a Kubernetes cluster in your own private namespace.
 
 .. toctree::
    :maxdepth: 1
