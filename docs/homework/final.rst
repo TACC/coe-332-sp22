@@ -75,12 +75,12 @@ PART 3: Write Up
 ~~~~~~~~~~~~~~~~
 
 We are looking for a 10-11 page written document (as a PDF) describing the project.
-Audience should be ABET committee. The written document should be verbose and
-targeted towards a non-user, but technically savvy layperson. Be sure to include
-narrative about the motivation of the project, why it is interesting or important
-to have the application you developed, a detailed description of the data
-(include citation), and you must include a short section on “Ethical and Professional
-Responsibilities in Engineering Situations".
+The written document should be verbose and targeted towards a non-user, but technically
+savvy layperson (e.g. one of your fellow engineering students who is not taking this
+class). Be sure to include narrative about the motivation of the project, why it is
+interesting or important to have the application you developed, a detailed description
+of the data (include citation), and you must include a short section on “Ethical and
+Professional Responsibilities in Engineering Situations".
 
 
 
