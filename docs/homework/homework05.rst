@@ -30,6 +30,18 @@ The command to do the above plus a description of what it is doing should be
 included in the README.
 
 
+.. tip::
+
+   After creating the Redis container, do:
+
+   * ``docker inspect <container ID> | grep IPAddress`` to find the IP (e.g. 172.xx.x.x)
+   * Create the redis client in your Flask app as: ``redis.Redis(host='172.xx.x.x', port=6379)``
+   * Replace ``172.xx.x.x`` with the actual IP you find in the first part
+   * Use the default port ``6379`` when communicating over the docker bridge network
+   * `More info here <https://www.tutorialworks.com/container-networking/>`_
+
+
+
 PART 2
 ~~~~~~
 
@@ -90,3 +102,4 @@ Additional Resources
 
 * `Meteorite Landing Data <https://raw.githubusercontent.com/wjallen/coe332-sample-data/main/ML_Data_Sample.json>`_
 * `Persistence in Redis <https://redis.io/topics/persistence>`_
+* `Docker Bridge Network <https://www.tutorialworks.com/container-networking/>`_
