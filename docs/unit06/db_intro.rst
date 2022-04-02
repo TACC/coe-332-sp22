@@ -122,7 +122,7 @@ Comparing SQL and NoSQL is an apples to oranges comparison.
 * SQL databases "enforce" relationships between data types, including one-to-one, one-to-many,
   and many-to-many. When the integrity of the data is important, SQL databases are a good choice.
 * In many NoSQL databases, the relationship enforcement must be programmed into the application. This
-  can be error-prone add can increase the development effort needed to build the application. On the
+  can be error-prone and can increase the development effort needed to build the application. On the
   other hand, this can allow the
   database to be used for use cases where relationship enforcement is not possible.
 * SQL databases historically cannot scale to the "largest" quantities of data because of
