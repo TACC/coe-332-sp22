@@ -1,5 +1,6 @@
 Introduction to APIs
 =====================
+
 In this section, we will discuss Application Programming Interfaces (APIs)
 focusing on Web APIs, and in particular REST APIs. We
 will learn how to interact with APIs using Python scripts. After going through
@@ -9,8 +10,8 @@ this module, students should be able to:
 * List the four most important HTTP verbs and define how they are used in REST APIs.
 * Describe how URLs are used to represent objects in a REST API.
 * Explore API endpoints provided by various websites, e.g., GitHub.
-* Install the Python requests library, and use it to interact with a web API in a Python script,
-  including making requests and parsing responses.
+* Install the Python ``requests`` library, and use it to interact with a web API
+  in a Python script, including making requests and parsing responses.
 
 
 An Application Programming Interface (API) establishes the protocols and methods
@@ -33,13 +34,13 @@ that connects one piece of software to another.
 
 APIs:
 
-  (1) Provide functionality to external software in the form of a contract that specifies
-      the inputs that the consuming software must provide and the outputs that the API
-      will produce from the inputs.
-  (2) Conceal the implementation of this functionality from the consuming software so
-      that changes can be made to the implementation without impacting consumers.
-  (3) Provide errors when the consuming software doesn't fulfill the contract of the API or when
-      unexpected circumstances are encountered.
+(1) Provide functionality to external software in the form of a contract that specifies
+    the inputs that the consuming software must provide and the outputs that the API
+    will produce from the inputs.
+(2) Conceal the implementation of this functionality from the consuming software so
+    that changes can be made to the implementation without impacting consumers.
+(3) Provide errors when the consuming software doesn't fulfill the contract of the API or when
+    unexpected circumstances are encountered.
 
 
 We have already been working with APIs. For example, the Python ``json`` library
@@ -80,12 +81,16 @@ We use ``json.dumps()`` to convert Python objects to JSON (string) data and we u
 We say that ``dumps`` and ``loads`` are part of the Python ``json`` API. In terms of the
 contract, we might say something like:
 
-  * ``json.loads()`` -- This function accepts a single input (string, bytes or bytes array) representing
-    a valid JSON document and returns the equivalent Python object.
+* ``json.loads()`` -- This function accepts a single input (string, bytes or bytes array) representing
+  a valid JSON document and returns the equivalent Python object.
+
   * It will raise a ``JSONDecodeError`` if the input is not a valid JSON document.
-  * ``json.dumps()`` -- This function accepts a single input (a Python object) and serializes
-    it to a string. The Python object must be JSON serializable.
+
+* ``json.dumps()`` -- This function accepts a single input (a Python object) and serializes
+  it to a string. The Python object must be JSON serializable.
+
   * It will raise a ``TypeError`` if the input is not JSON serializable.
+
 
 Web APIs
 --------
@@ -94,15 +99,14 @@ In this course, we will be building Web APIs or HTTP APIs. These are interfaces
 that are exposed over HTTP, allowing them to be consumed by software running on different
 machines.
 
-There are a number of advantages to Web-based APIs
-that we will use in this class:
+There are a number of advantages to Web-based APIs that we will use in this class:
 
 * A Web API can be made accessible to any computer or application that can access
   the public internet. Alternatively, a Web API can be restricted to a private network.
-* No software installation is required on the client's side to consume a web API.
+* No software installation is required on the client's side to consume a Web API.
 * Web APIs can change their implementation without clients knowing (or caring).
 * Virtually every modern programming language provides one or more libraries for
-  interacting with a web API; thus, Web APIs are "programming language agnostic".
+  interacting with a Web API; thus, Web APIs are "programming language agnostic".
 
 
 
@@ -139,6 +143,7 @@ protocol are:
 
 Web Page Examples
 -----------------
+
 Open a browser window, type ``https://github.com`` into the address bar and hit go.
 We see the GitHub home page which looks something like this:
 
@@ -150,13 +155,13 @@ We see the GitHub home page which looks something like this:
 In fact, a multi-step process just occurred; here is a slightly simplified version of what
 happened:
 
-  (1) Your browser made an HTTP GET request to https://github.com.
-  (2) A GitHub server received the request from your browser, formulated a response message
-      containing the data (in HTML format) of your home page, with a 200 response code
-      to indicate success.
-  (3) Your browser received the response message from the GitHub server, and determined that
-      the request was successful, due to the 200 response code.
-  (4) It then drew the HTML message in the browser window.
+(1) Your browser made an HTTP GET request to https://github.com.
+(2) A GitHub server received the request from your browser, formulated a response message
+    containing the data (in HTML format) of your home page, with a 200 response code
+    to indicate success.
+(3) Your browser received the response message from the GitHub server, and determined that
+    the request was successful, due to the 200 response code.
+(4) It then drew the HTML message in the browser window.
 
 If enter a URL that GitHub doesn't recognize, we get a page that looks like this:
 
@@ -165,7 +170,7 @@ If enter a URL that GitHub doesn't recognize, we get a page that looks like this
     :align: center
 
 Most browsers have tools for determining what requests and responses were made. For example,
-in Chrome, we can use "More tools -> Developer Tools" from the Customize and Control menu
+in Chrome, we can use "More Tools -> Developer Tools" from the Customize and Control menu
 (the three dots in the top-right corner), to open up a panel for introspecting the requests
 being made.
 
@@ -203,7 +208,7 @@ following the base URL; e.g.:
    <base_url>/files
    <base_url>/programs
 
-or they are specific items in a collection, represented by an identifier following the
+Or they are specific items in a collection, represented by an identifier following the
 collection name, e.g.:
 
 .. code-block:: console
@@ -212,7 +217,8 @@ collection name, e.g.:
    <base_url>/files/test.txt
    <base_url>/programs/myapplication
 
-or subcollections or items in subcollections, e.g.:
+
+Or subcollections or items in subcollections, e.g.:
 
 .. code-block:: console
 
@@ -236,7 +242,7 @@ Thus,
 * POST ``<base_url>/users`` would create a new user.
 * PUT ``<base_url>/users/12345`` would update user 12345.
 
-The combination of an HTTP verb and URL (path) are called an **endpoint** in an API. A REST
+The combination of an HTTP verb and URL (path) is called an **endpoint** in an API. A REST
 API is typically comprised of many endpoints.
 
 Note that not all HTTP verbs make sense for all URLs. For example, an API would probably not
@@ -282,6 +288,7 @@ A catalog of countries, cities and neighborhoods:
 
 REST APIs - A Real Example
 --------------------------
+
 We have been using GitHub to host our class code repositories. It turns out GitHub
 provides an HTTP API that is architected using REST (for the most part). We're going
 to explore the GitHub API.
@@ -331,9 +338,9 @@ You will see something like this:
 This should look familiar -- it's a JSON document, and it describes various collections of
 endpoints in the GitHub API. For example, we see:
 
-  * ``"events_url": "https://api.github.com/events",`` -- Work with GitHub events
-  * ``"organization_url": "https://api.github.com/orgs/{org}",`` -- Work with GitHub orgs
-  * ``"repository_url": "https://api.github.com/repos/{owner}/{repo}",`` -- Work with GitHub repos
+* ``"events_url": "https://api.github.com/events",`` -- Work with GitHub events
+* ``"organization_url": "https://api.github.com/orgs/{org}",`` -- Work with GitHub orgs
+* ``"repository_url": "https://api.github.com/repos/{owner}/{repo}",`` -- Work with GitHub repos
 
 Many of the endpoints within the GitHub API require *authentication*, i.e., that the requesting
 application prove its identity -- we'll ignore this topic for now and just work with the
@@ -342,12 +349,14 @@ endpoints that do not require authentication.
 Let's discover what the GitHub API can tell us about TACC's GitHub organization, which is
 just called ``tacc``.
 
-**EXERCISE**
+EXERCISE
+~~~~~~~~
 
 Based on the information above, how would we retrieve information about the TACC GitHub
 organization from the API? What HTTP verb and URL would we use?
 
-**SOLUTION**
+SOLUTION
+~~~~~~~~
 
 We see that the "organization_url" is defined to be ``"https://api.github.com/orgs/{org}"``.
 The use of the ``{org}`` notation is common in API documentation -- it indicates a variable
@@ -403,7 +412,7 @@ interact with Web APIs in a much more powerful and programmatic way using the
 Python ``requests`` library.
 
 First install the ``requests`` library in your local site-packages on the ISP server using
-pip:
+pip3:
 
 .. code-block:: console
 
@@ -443,14 +452,15 @@ The basic usage of the ``requests`` library is as follows:
    >>> response.json()
 
 
-**EXERCISE**
+EXERCISE
+~~~~~~~~
 
 Let's use ``requests`` to explore the GitHub API. Write functions to return the following:
 
 * Given a GitHub organization id, retrieve all information about the organization. Return
   the information as a Python dictionary.
 * Given a GitHub organization id, retrieve a list of all of the members of the organization.
-  Return the list of members as a Python list of strings, where each string contains the member'same
+  Return the list of members as a Python list of strings, where each string contains the member's
   ``login`` (i.e., GitHub username) attribute.
 * Given a GitHub organization id, return a list of repositories controlled by the organization.
   Return the list f repositories as a Python list of strings, where each string contains the

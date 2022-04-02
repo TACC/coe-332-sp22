@@ -1,14 +1,14 @@
 Introduction to Flask
 =====================
 
-In this section, we will get a brief introduction into Flask, the Python web framework, 
+In this section, we will get a brief introduction into Flask, the Python web framework,
 including how to set up a REST API with multiple routes (URLs). After going through this
 module, students should be able to:
 
 * Install the Python Flask library and import it into a Python program.
 * Define and implement various "routes" or API endpoints in a Flask Python program.
 * Run a local Flask development server.
-* Use curl to test routes defined in their Flask program when the local Flask development 
+* Use curl to test routes defined in their Flask program when the local Flask development
   server is running.
 
 
@@ -39,6 +39,7 @@ including Netflix, Amazon, and eBay.
 
 There is a great article on DevTeam.Space
 `about microservices <https://www.devteam.space/blog/microservice-architecture-examples-and-diagram/>`_.
+
 
 Setup and Installation
 ----------------------
@@ -78,7 +79,7 @@ the class server, perform the following:
      shell   Run a shell in the app context.
 
 
-.. tip:
+.. tip::
 
    If you aren't already using a virtual environment to help manage your Python
    libraries, now is a `good time to start <https://docs.python.org/3/library/venv.html>`_!
@@ -112,6 +113,7 @@ Finally, the ``app.run()`` method launches the development server. The
 server is running. The ``host=0.0.0.0`` option instructs the server to listen
 on all network interfaces; basically this means you can reach the server from
 inside and outside the host VM.
+
 
 Run the Flask App
 -----------------
@@ -181,7 +183,7 @@ curl Basics
 You can think of ``curl`` as a command-line version of a web browser: it is just
 an HTTP client.
 
-* The basic syntax is ``curl <some_base_url>:<some_port>`/<some_url_path>``. 
+* The basic syntax is ``curl <some_base_url>:<some_port>/<some_url_path>``.
   This will make a ``GET``
   request to the URL and port print the message response.
 * Curl will default to using port 80 for HTTP and port 443 for HTTPS.
@@ -352,15 +354,15 @@ Routes with URL Parameters
 
 Flask makes it easy to create routes (or URLs) with variables in the URL. The
 variable name simply must appear in angled brackets (``<>``) within the
-``@app.route()`` decorator statement; for example:
+``@app.route()`` decorator statement; for example the following would grant the
+function below it access to a variable called ``year``:
 
 .. code-block:: python3
 
    @app.route('/<year>')
 
-would grant the function below it access to a variable called ``year``
 
-In the following example, we extend our ``app.py`` Flask app by adding a route
+In the next example, we extend our ``app.py`` Flask app by adding a route
 with a variable (``<name>``):
 
 .. code-block:: python3
@@ -397,21 +399,22 @@ Now, the Flask app supports multiple routes with different functionalities:
 
 EXERCISE
 ~~~~~~~~
+
 Let's utilize the meteorite landing data from the Advances Containers section of Unit 4
-to define a somewhat more interesting route. We'll create a route that allows a user 
-to download the entire dataset over HTTP. 
+to define a somewhat more interesting route. We'll create a route that allows a user
+to download the entire dataset over HTTP.
 
 We'll add one new route function. Consider the following?
 
-  * What should the name of our function be?
-  * What URL path should it respond to?
-  * What HTTP verb(s) should it handle?
+* What should the name of our function be?
+* What URL path should it respond to?
+* What HTTP verb(s) should it handle?
 
 Once those questions are answered, we'll need to actually implement the new route function.
-What will we need to do to implement the function? The implementation will require two 
+What will we need to do to implement the function? The implementation will require two
 steps:
 
-  1) Read the data into Python from the JSON file.
-  2) Return the result of step 1).
+1) Read the data into Python from the JSON file.
+2) Return the result of step 1).
 
 Finally, once we have implemented the function, let's test it using ``curl``.

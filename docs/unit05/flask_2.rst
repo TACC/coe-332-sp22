@@ -1,5 +1,6 @@
 Advanced Flask
 ==============
+
 We continue using Flask in this module with a look at more complex endpoints and data retrieval
 functions for our REST API. After going through this module, students should be able to:
 
@@ -7,12 +8,12 @@ functions for our REST API. After going through this module, students should be 
 * Convert unsupported types (e.g. ``list``) to valid Flask route return types
 * Extract Content-Type and other headers from Flask route responses
 * Add query parameters to GET requests, and extract their values inside Flask routes
-* Deal with errors from user-supplied input to an API and handle Python exceptions.
+* Deal with errors from user-supplied input to an API and handle Python exceptions
 
 .. note::
 
    We will continue to do our work on the isp02 VM. Like last time, it will be helpful for you to
-   have two SSH terminals open to isp02 at the same time so you can run your flask application in
+   have two SSH terminals open to isp02 at the same time so you can run your Flask application in
    one terminal and test it in the other.
 
 
@@ -30,34 +31,31 @@ students earning an undergraduate degree for a given year:
 
    def get_data():
        return [ {'id': 0, 'year': 1990, 'degrees': 5818},
-       {'id': 1, 'year': 1991, 'degrees': 5725},
-       {'id': 2, 'year': 1992, 'degrees': 6005},
-       {'id': 3, 'year': 1993, 'degrees': 6123},
-       {'id': 4, 'year': 1994, 'degrees': 6096} ]
+                {'id': 1, 'year': 1991, 'degrees': 5725},
+                {'id': 2, 'year': 1992, 'degrees': 6005},
+                {'id': 3, 'year': 1993, 'degrees': 6123},
+                {'id': 4, 'year': 1994, 'degrees': 6096} ]
 
 
 In this case, one collection described by the data is "degrees". So, let's
 define a route, ``/degrees``, that by default returns all of the data points.
 
-**EXERCISE 1**
+EXERCISE 1
+~~~~~~~~~~
 
 Create a new file, ``degrees_api.py`` to hold a Flask application then do the
 following:
 
-    1) Import the Flask class and instantiate a Flask application
-    object.
-
-    2) Add code so that the Flask server is started when this file is executed
-    directly by the Python interpreter.
-
-    3) Copy the ``get_data()`` method above into the application
-    script.
-
-    4) Add a route (``/degrees``) which responds to the HTTP ``GET`` request and
-    returns the complete list of data returned by ``get_data()`` as a Python string. **Hint:**
-    You won't
-    be able to return a Python list directly from your route function -- consider
-    casting the list to a string using the ``str()`` function.
+1) Import the Flask class and instantiate a Flask application
+   object.
+2) Add code so that the Flask server is started when this file is executed
+   directly by the Python interpreter.
+3) Copy the ``get_data()`` method above into the application
+   script.
+4) Add a route (``/degrees``) which responds to the HTTP ``GET`` request and
+   returns the complete list of data returned by ``get_data()`` as a Python string. **Hint:**
+   You won't be able to return a Python list directly from your route function -- consider
+   casting the list to a string using the ``str()`` function.
 
 In a separate Terminal use ``curl`` to test out your new route. Does it work as
 expected?
@@ -106,16 +104,16 @@ this later.)
    primer on the JSON format and relevant JSON-handling methods.
 
 
-**EXERCISE 2**
+EXERCISE 2
+~~~~~~~~~~
 
 Try doing this exercise in a Python (or ``ipython``) shell.
 
-    1) Serialize the list returned by the ``get_data()`` method above into a
-    JSON-formatted string using the Python ``json`` library. Verify that the type
-    returned is a string.
-
-    2) Next, Deserialize the string returned in part a) by using the ``json`` library
-    to decode it. Verify that the result equals the original list.
+1) Serialize the list returned by the ``get_data()`` method above into a
+   JSON-formatted string using the Python ``json`` library. Verify that the type
+   returned is a string.
+2) Next, deserialize the string returned in part 1 by using the ``json`` library
+   to decode it. Verify that the result equals the original list.
 
 
 Returning JSON (and Other Kinds of Data)
@@ -125,7 +123,8 @@ You probably are thinking at this point we can fix our solution to the first **E
 by using the ``json`` library (which function?). Let's try that and see what
 happens:
 
-**EXERCISE 3**
+EXERCISE 3
+~~~~~~~~~~
 
 Update your code from the first Exercise to use the ``json`` library to return a properly
 formatted JSON string.
@@ -138,6 +137,7 @@ session in another window and:
 * Verify that ``r.status_code`` is what you expect (what do you expect it to be?)
 * Verify that ``r.content`` is what you expect.
 * Use ``r.json()`` to decode the response and compare the type to that of ``r.content``.
+
 
 HTTP Content Type Headers
 -------------------------
@@ -154,26 +154,25 @@ size of the message (``Content-Length``), the domain the server is listening on
 We can use ``curl`` or the python ``requests`` library to see all of the headers
 returned on a response from our flask server. Let's try it.
 
-**EXERCISE 4**
+EXERCISE 4
+~~~~~~~~~~
 
-  1) Use ``curl`` to make a GET request to your ``/degrees`` endpoint
-  and pass the ``-v`` (for "verbose") option. This will show you additional information,
-  including the headers. Note that with ``-v``, curl shows headers on both the request and
-  the response. Request headers are lines that start with a ``>`` while response headers are
-  lines that start with a ``<``.
-
-  2). Use ``curl`` again to make the same request, but this time pass the ``--head``
-  option instead of the ``-v``; this will show you **only** the headers being
-  returned in the response.
-
-  3) Inside a python shell, use ``requests`` to make the same GET request to your ``/degrees``
-  endpoint, and capture the result in a variable, ``r``. Inspect the ``r.header`` attribute.
-  What is the type of ``r.headers``?
+1) Use ``curl`` to make a GET request to your ``/degrees`` endpoint
+   and pass the ``-v`` (for "verbose") option. This will show you additional information,
+   including the headers. Note that with ``-v``, curl shows headers on both the request and
+   the response. Request headers are lines that start with a ``>`` while response headers are
+   lines that start with a ``<``.
+2) Use ``curl`` again to make the same request, but this time pass the ``--head``
+   option instead of the ``-v``; this will show you **only** the headers being
+   returned in the response.
+3) Inside a Python shell, use ``requests`` to make the same GET request to your ``/degrees``
+   endpoint, and capture the result in a variable, ``r``. Inspect the ``r.header`` attribute.
+   What is the type of ``r.headers``?
 
 
 .. code-block:: console
 
-  curl localhost:5000/degrees -v
+   curl localhost:5000/degrees -v
 
    * About to connect() to localhost port 5000 (#0)
    *   Trying ::1...
@@ -193,7 +192,7 @@ returned on a response from our flask server. Let's try it.
    < Date: Fri, 04 Mar 2022 01:12:34 GMT
 
 
-.. code-block:: python
+.. code-block:: python3
 
    In [1]: import requests
 
@@ -218,6 +217,7 @@ about media types are that they:
 * The most common values (type and subtype) are application/json,
   application/xml, text/html, audio/mpeg, image/png, and multipart/form-data
 
+
 Content Types in Flask
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -237,16 +237,17 @@ return a content type of aplication/json:
    return flask.jsonify(['a', 'b', 'c'])
 
 
-**EXERCISE 5**
+EXERCISE 5
+~~~~~~~~~~
 
 Use the ``flask.jsonify()`` method to update your code from Exercise 1. Then:
-
 
 * Validate that your ``/degrees`` endpoint works as expected by using the
   ``requests`` library to make an API request and check that the ``.json()``
   method works as expected on the response.
 * Use the ``.headers()`` method on the response to verify the ``Content-Type``
   is what you expect.
+
 
 Query Parameters
 ----------------
@@ -291,6 +292,7 @@ extract the passed query parameter into a variable.
 
 
 .. code-block:: python3
+   :linenos:
 
    from flask import Flask, request
 
@@ -318,7 +320,7 @@ Let's use this idea to update our ``degrees_api`` to only return the years start
 ``start`` query parameter year, if that parameter is provided.
 
 
-.. code-block:: python
+.. code-block:: python3
 
    @app.route('/degrees', methods=['GET'])
    def degrees():
@@ -335,7 +337,7 @@ query parameter that isn't an integer? We can test it ourselves.
 
 .. code-block:: console
 
-  curl 127.0.0.1:5000/degrees?start=abc
+   [isp02]$ curl 127.0.0.1:5000/degrees?start=abc
 
 
 If we try this we get some nasty stuff that ends with a traceback, like this:
@@ -357,7 +359,7 @@ If we try this we get some nasty stuff that ends with a traceback, like this:
       return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
    File "/home/jstubbs/coe332-sp22/flask_2/degrees_api_2.py", line 31, in degrees3
       start = int(request.args.get('start', 0))
-   ValueError: invalid literal for int() with base 10: 'foo'
+   ValueError: invalid literal for int() with base 10: 'abc'
 
 
 Checking User Input
@@ -392,18 +394,22 @@ Let's try some examples in the Python shell:
 Now, let's fix our route function; we can check if it is numeric before casting to an ``int``.
 If it is not numeric, we can return an error message to the user.
 
-.. code-block:: python
+.. code-block:: python3
+   :linenos:
 
-    d = get_data()
-    start = request.args.get('start', 0)
-    if not start.isnumeric():
-        return 'Invalid start value; start must be numeric.'
-    start = int(start)
-    return flask.jsonify(d[start:])
+    @app.route('/degrees', methods=['GET'])
+    def degrees():
+        d = get_data()
+        start = request.args.get('start', 0)
+        if not start.isnumeric():
+            return 'Invalid start value; start must be numeric.'
+        start = int(start)
+        return flask.jsonify(d[start:])
 
 
 Exceptions
 ~~~~~~~~~~
+
 Using the ``isnumeric()`` function allowed us to check for invalid user input in the specific
 case above, but Python provides a far more general and powerful error handling capability, called
 Exceptions, that we will discuss next.
@@ -463,10 +469,10 @@ A few notes:
 * If a statement(s) within the ``try`` block does not raise an exception, the ``except`` blocks are
   skipped.
 * If a statement within the ``try`` block does raise an exception, Python looks at the
-  ``except`` blocks for the first one matching the type of the exception raised and executed that
+  ``except`` blocks for the first one matching the type of the exception raised and executes that
   block of code.
 * The ``finally`` block is optional but it executes regardless of whether an exception was raised
-  by a statement in the
+  by a statement or not.
 * The ``as e`` clause puts the exception object into a variable (``e``) that we can use.
 * The use of ``e`` was arbitrary; we could choose to use any other valid variable identifier.
 * We can also leave off the ``as e`` part altogether if we don't need to reference the exception
@@ -475,7 +481,7 @@ A few notes:
 Here's how we could deal with an invalid ``start`` parameter provided by the user
 using exceptions:
 
-.. code-block:: python
+.. code-block:: python3
 
     try:
         start = int(start)
@@ -518,7 +524,8 @@ Here are some best practices to keep in mind for handling exceptions:
 
 Here is the full code for our route function with exception handling.
 
-.. code-block:: python
+.. code-block:: python3
+   :linenos:
 
    @app.route('/degrees', methods=['GET'])
    def degrees():
@@ -533,10 +540,11 @@ Here is the full code for our route function with exception handling.
 
 
 
-**EXERCISE 5**
+EXERCISE 6
+~~~~~~~~~~
 
 
-Add support for a ``limit`` parameter to the code you wrote for Exercise 4. The
+Add support for a ``limit`` parameter to the code you wrote for Exercise 5. The
 ``limit`` parameter should be optional. When passed with an integer value, the
 API should return no more than ``limit`` data points.
 

@@ -7,13 +7,13 @@ other applications and services, and deploying it in a consistent and reproducib
 way across different platforms.
 
 Here, we will walk through the process of containerizing a Flask application with Docker, and then
-using ``curl`` to interact with it as a containerized microservice. After going through this 
+using ``curl`` to interact with it as a containerized microservice. After going through this
 module, students should be able to:
 
 * Assemble the different components needed for a containerized microservice into on directory.
 * Establish and document requirements (e.g. dependencies, Python packages) for the project.
 * Build and run in the background a containerized Flask microservice.
-* Map ports on the ISP server to ports inside a container, and use ``curl`` with the 
+* Map ports on the ISP server to ports inside a container, and use ``curl`` with the
   the correct ports to make requests to and generate responses from the microservice.
 
 
@@ -52,9 +52,10 @@ should have the following contents:
 
 Specify Requirements
 ---------------------
-The Python package manager ``pip`` can utilize a text file for managing package dependencies of 
-your application. 
-It is standard practice to to capture the required libraries and packages for a project in 
+
+The Python package manager ``pip`` can utilize a text file for managing package dependencies of
+your application.
+It is standard practice to to capture the required libraries and packages for a project in
 a file called ``requirements.txt``. For our example here, create a file called
 ``requirements.txt`` and add the following line:
 
@@ -63,19 +64,20 @@ a file called ``requirements.txt``. For our example here, create a file called
    Flask==2.0.3
 
 This indicates that our project requires the ``Flask`` package, version number ``2.0.3``.
-You can specify your requirements in more lenient ways -- for example, we could have 
+You can specify your requirements in more lenient ways -- for example, we could have
 put ``Flask>=2.0.3`` to indicate that any version greater than or equal to ``2.0.3`` would work,
-or we could have even put ``Flask`` with no version indicating we don't care what version of 
-Flask is installed. 
+or we could have even put ``Flask`` with no version indicating we don't care what version of
+Flask is installed.
 
 Note:
 
-* Specifying a package, such as ``Flask`` as a dependency instructs pip to install Flask *and all 
-  of its dependencies*. Those dependencies could in turn have dependencies, etc., and pip will 
-  take care of installing all of those.  
+* Specifying a package, such as ``Flask`` as a dependency instructs pip to install Flask *and all
+  of its dependencies*. Those dependencies could in turn have dependencies, etc., and pip will
+  take care of installing all of those.
 * Specifying the exact version improves the odds that your application will work correctly because
-  the packages that get installed will be the versions you specified. Therefore, it is 
-  usually best to specify the exact version of the library your application requires. 
+  the packages that get installed will be the versions you specified. Therefore, it is
+  usually best to specify the exact version of the library your application requires.
+
 
 Build a Docker Image
 --------------------
@@ -102,11 +104,11 @@ Here we see usage of the Docker ``ENTRYPOINT`` and ``RUN`` instructions, which
 essentially specify a default command (``python app.py``) that should be run
 when an instance of this image is instantiated.
 
-Note also that we copied the ``requirements.txt`` file before copying the full 
+Note also that we copied the ``requirements.txt`` file before copying the full
 current working directory. Why did we do that?
 
-The answer has to do with how Docker caches image layers. We could have written the following 
-instead: 
+The answer has to do with how Docker caches image layers. We could have written the following
+instead:
 
 .. code-block:: console
 
@@ -116,22 +118,22 @@ instead:
     WORKDIR /app
     COPY . /app
     RUN pip install -r /app/requirements.txt
-    
+
     ENTRYPOINT ["python"]
     CMD ["app.py"]
 
 The above is actually shorter; i.e., fewer lines of code in the Dockerfile.
 
-However, with the above approach, Docker is going to re-run the command 
+However, with the above approach, Docker is going to re-run the command
 ``pip install -r /app/requirements.txt`` every time there is any change to the contents
 of the current working directory (i.e., any time we change our app code or any other files).
-This is not a big deal with a small ``requirements.txt`` file and only a few packages to install, 
+This is not a big deal with a small ``requirements.txt`` file and only a few packages to install,
 but as the ``requirements.txt`` file gets bigger, the time to install all the packages
 can be significant.
 
-As a general rule of thumb, put more expensive (in term of time) operations whose are less likely 
-to change at the beginning of your ``Dockerfile`` to maximize the value of the Docker image 
-layer cache. 
+As a general rule of thumb, put more expensive (in term of time) operations whose are less likely
+to change at the beginning of your ``Dockerfile`` to maximize the value of the Docker image
+layer cache.
 
 
 Save the file and build the image with the following command:
@@ -188,7 +190,7 @@ the following:
 Access Your Microservice
 ------------------------
 
-Now for the payoff - you can use ``curl`` to interact with your Flask microservice by specifying 
+Now for the payoff - you can use ``curl`` to interact with your Flask microservice by specifying
 the correct port on the ISP server. Following the example above, which was using
 port 5050:
 
@@ -215,10 +217,11 @@ Finally, don't forget to stop your running container and remove it.
    60be6788d73d
 
 
-**EXERCISE**
+EXERCISE
+~~~~~~~~
 
 Containerize your flask meteorite landings server from last week:
 
-  1. Create a Dockerfile for your server.
-  2. Build the image from the Dockerfile. 
-  3. Run the server locally and test the ``/data`` endpoint using curl. 
+1. Create a Dockerfile for your server.
+2. Build the image from the Dockerfile.
+3. Run the server locally and test the ``/data`` endpoint using curl.
