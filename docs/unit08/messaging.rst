@@ -16,7 +16,7 @@ By the end of this module, the student should be able to:
   * Explain the general approach to organizing Python code into different modules and describe how to
     do this for the flask-based API system we are building. 
   * Implement good code organization practices including denoting objects as public or private. 
-  
+
 
 Task Queue (or Work Queue)
 --------------------------
@@ -238,17 +238,28 @@ To begin, place them in the appropriate files. Also, determine if they should be
 
 .. code-block:: python
 
-    def _generate_jid():
+    def generate_jid():
+        """
+        Generate a pseudo-random identifier for a job.
+        """
         return str(uuid.uuid4())
 
     app = Flask(__name__)
 
-    def _generate_job_key(jid):
+    def generate_job_key(jid):
+        """
+        Generate the redis key from the job id to be used when storing, retrieving or updating 
+        a job in the database. 
+        """
         return 'job.{}'.format(jid)
 
     q = HotQueue("queue", host='172.17.0.1', port=6379, db=1)
 
-    def _instantiate_job(jid, status, start, end):
+    def instantiate_job(jid, status, start, end):
+        """
+        Create the job object description as a python dictionary. Requires the job id, status, 
+        start and end parameters.
+        """
         if type(jid) == str:
             return {'id': jid,
                     'status': status,
@@ -263,44 +274,58 @@ To begin, place them in the appropriate files. Also, determine if they should be
 
     @app.route('/jobs', methods=['POST'])
     def jobs_api():
+        """
+        API route for creating a new job to do some analysis. This route accepts a JSON payload 
+        describing the job to be created. 
+        """
         try:
             job = request.get_json(force=True)
         except Exception as e:
             return True, json.dumps({'status': "Error", 'message': 'Invalid JSON: {}.'.format(e)})
         return json.dumps(jobs.add_job(job['start'], job['end']))
 
-    def _save_job(job_key, job_dict):
+    def save_job(job_key, job_dict):
         """Save a job object in the Redis database."""
-        rd.hmset(.......)
+        rd.hset(.......)
 
-    def _queue_job(jid):
+    def queue_job(jid):
         """Add a job to the redis queue."""
         ....
 
     if __name__ == '__main__':
+        """
+        Main entrypoint of the API server
+        """
         app.run(debug=True, host='0.0.0.0')
 
     def add_job(start, end, status="submitted"):
         """Add a job to the redis queue."""
-        jid = _generate_jid()
-        job_dict = _instantiate_job(jid, status, start, end)
-        _save_job(......)
-        _queue_job(......)
+        jid = generate_jid()
+        job_dict = instantiate_job(jid, status, start, end)
+        save_job(......)
+        queue_job(......)
         return job_dict
 
     @<...>   # fill in
     def execute_job(jid):
+        """
+        Retrieve a job id from the task queue and execute the job.
+        Monitors the job to completion and updates the database accordingly. 
+        """
         # fill in ...
+        # the basic steps are: 
+        # 1) get job id from message and update job status to indicate that the job has started
+        # 2) start the analysis job and monitor it to completion. 
+        # 3) update the job status to indicate that the job has finished. 
 
     rd = redis.StrictRedis(host='172.17.0.1', port=6379, db=0)
 
     def update_job_status(jid, status):
         """Update the status of job with job id `jid` to status `status`."""
-        jid, status, start, end = rd.hmget(generate_job_key(jid), 'id', 'status', 'start', 'end')
-        job = _instantiate_job(jid, status, start, end)
+        job = get_job_by_id(jid)
         if job:
             job['status'] = status
-            _save_job(_generate_job_key(jid), job)
+            save_job(generate_job_key(jid), job)
         else:
             raise Exception()
 
@@ -317,6 +342,10 @@ so we add those both in the ``api.py`` file:
 
     @app.route('/jobs', methods=['POST'])
     def jobs_api():
+        """
+        API route for creating a new job to do some analysis. This route accepts a JSON payload 
+        describing the job to be created. 
+        """
         try:
             job = request.get_json(force=True)
         except Exception as e:
@@ -326,28 +355,44 @@ so we add those both in the ``api.py`` file:
     if __name__ == '__main__':
         app.run(debug=True, host='0.0.0.0')
 
-We also recognize several functions are private by the leading ``_`` in the name. They are:
+We also recognize that several functions appear to be jobs-related:
 
-  * ``_generate_jid``
-  * ``_generate_job_key``
-  * ``_instantiate_job``
-  * ``_save_job``
-  * ``_queue_job``
+  * ``generate_jid``
+  * ``generate_job_key``
+  * ``instantiate_job``
+  * ``save_job``
+  * ``queue_job``
+  * ``add_job``
+  * ``execute_job``
+  * ``update_job_status``
 
-These all have to do with jobs and are used (either directly or indirectly) by the ``add_job`` function. One more hint
-is that the ``jobs_api()`` function, which we just put in ``api.py``, actually references ``jobs.add_job``, so we can
-put these in the ``jobs.py`` file:
+Note that the ``jobs_api()`` function, which we just put in ``api.py``, actually references 
+``jobs.add_job``, so we can put ``add_job`` in the ``jobs.py`` file as a public function, and 
+anything that it calls can be added to ``jobs.py`` as a (potentially private) function. Note
+that ``add_job`` calls the following functions:
+
+  * ``generate_jid``
+  * ``instantiate_job``
+  * ``save_job``
+  * ``queue_job``
+
+so we can put all of these in jobs.py:
+
 
 .. code-block:: python
 
   # jobs.py
-    def _generate_jid():
+    def generate_jid():
+        """
+        Generate a pseudo-random identifier for a job.
+        """
         return str(uuid.uuid4())
 
-    def _generate_job_key(jid):
-        return 'job.{}'.format(jid)
-
-    def _instantiate_job(jid, status, start, end):
+    def instantiate_job(jid, status, start, end):
+        """
+        Create the job object description as a python dictionary. Requires the job id, status, 
+        start and end parameters.
+        """
         if type(jid) == str:
             return {'id': jid,
                     'status': status,
@@ -360,32 +405,40 @@ put these in the ``jobs.py`` file:
                 'end': end.decode('utf-8')
         }
 
-    def _save_job(job_key, job_dict):
+    def save_job(job_key, job_dict):
         """Save a job object in the Redis database."""
-        rd.hmset(.......)
+        rd.hset(.......)
 
-    def _queue_job(jid):
+    def queue_job(jid):
         """Add a job to the redis queue."""
         ....
 
     def add_job(start, end, status="submitted"):
         """Add a job to the redis queue."""
         jid = _generate_jid()
-        job_dict = _instantiate_job(jid, status, start, end)
-        _save_job(......)
-        _queue_job(......)
+        job_dict = instantiate_job(jid, status, start, end)
+        save_job(......)
+        queue_job(......)
         return job_dict
 
-That leaves the definition of the ``q = HotQueue(..)``, ``rd = StrictRedis(..)``, ``update_job_status()`` and ``execute_job()``.
+That leaves the following:
+
+  * ``q = HotQueue(..)`` 
+  * ``rd = StrictRedis(..)``
+  * ``update_job_status()``
+  * ``generate_job_key``
+  * ``execute_job()``
+
+Consider that:
 
   * We know ``worker.py`` is responsible for actually executing the job, so ``execute_job`` should go there.
   * The ``update_job_status()`` is a jobs-related task, so it goes in the ``jobs.py`` file -- it also makes a call to
-    ``_instantiate_job`` which is already in ``jobs.py``.
+    ``instantiate_job`` which is already in ``jobs.py``.
   * The jobs.py file definitely needs access to the ``rd`` object so that goes there.
   * Lastly, the ``q`` will be needed by both ``jobs.py`` and ``worker.py``, but ``worker.py`` is
     already importing from ``jobs``, so we better put it in ``jobs.py`` as well.
 
-Therefore, the final solution is:
+Therefore, the final placement of all the functions looks like the following: 
 
 .. code-block:: python
 
@@ -393,8 +446,12 @@ Therefore, the final solution is:
 
     app = Flask(__name__)
 
-    @app.route('/jobs', methods=['POST'])
+    @app.route('/jobs', methods=['POST'])    
     def jobs_api():
+        """
+        API route for creating a new job to do some analysis. This route accepts a JSON payload
+        describing the job to be created.
+        """
         try:
             job = request.get_json(force=True)
         except Exception as e:
@@ -411,13 +468,24 @@ Therefore, the final solution is:
     q = HotQueue("queue", host='172.17.0.1', port=6379, db=1)
     rd = redis.StrictRedis(host='172.17.0.1', port=6379, db=0)
 
-    def _generate_jid():
+    def generate_jid():
+        """
+        Generate a pseudo-random identifier for a job.
+        """
         return str(uuid.uuid4())
 
-    def _generate_job_key(jid):
-        return 'job.{}'.format(jid)
+    def generate_job_key(jid):
+    """
+    Generate the redis key from the job id to be used when storing, retrieving or updating
+    a job in the database.
+    """
+    return 'job.{}'.format(jid)
 
-    def _instantiate_job(jid, status, start, end):
+    def instantiate_job(jid, status, start, end):
+        """
+        Create the job object description as a python dictionary. Requires the job id, status, 
+        start and end parameters.
+        """
         if type(jid) == str:
             return {'id': jid,
                     'status': status,
@@ -430,26 +498,25 @@ Therefore, the final solution is:
                 'end': end.decode('utf-8')
         }
 
-    def _save_job(job_key, job_dict):
+    def save_job(job_key, job_dict):
         """Save a job object in the Redis database."""
-        rd.hmset(.......)
+        rd.hset(.......)
 
-    def _queue_job(jid):
+    def queue_job(jid):
         """Add a job to the redis queue."""
         ....
 
     def add_job(start, end, status="submitted"):
         """Add a job to the redis queue."""
         jid = _generate_jid()
-        job_dict = _instantiate_job(jid, status, start, end)
-        _save_job(......)
-        _queue_job(......)
+        job_dict = instantiate_job(jid, status, start, end)
+        save_job(......)
+        queue_job(......)
         return job_dict
 
     def update_job_status(jid, status):
         """Update the status of job with job id `jid` to status `status`."""
-        jid, status, start, end = rd.hmget(generate_job_key(jid), 'id', 'status', 'start', 'end')
-        job = _instantiate_job(jid, status, start, end)
+        job = get_job_by_id(jid)
         if job:
             job['status'] = status
             _save_job(_generate_job_key(jid), job)
@@ -461,7 +528,26 @@ Therefore, the final solution is:
   # worker.py
     @<...>   # fill in
     def execute_job(jid):
+        """
+        Retrieve a job id from the task queue and execute the job.
+        Monitors the job to completion and updates the database accordingly.
+        """    
         # fill in ...
+        # the basic steps are: 
+        # 1) get job id from message and update job status to indicate that the job has started
+        # 2) start the analysis job and monitor it to completion. 
+        # 3) update the job status to indicate that the job has finished. 
+
+Now that we have placed all of the functions, we can determine which ones should be public and which
+ones should be private. In general, we want to limit the number of public functions we have. Public 
+functions represent an API for other modules, and the larger the API, the more difficult it will be 
+to make changes in the future. 
+
+To this end, we need to determine which functions are called from external modules and which ones 
+are only used locally. We see that ``add_job`` is called from the ``jobs_api`` function in ``api.py``,
+so ``add_job`` should be public. Additionally, while the code isn't explicitly provided, it is clear 
+that the ``execute_job`` function will need to call ``update_job_status``, so that should be public 
+as well. All the other jobs functions are only used internally and can be made private. 
 
 
 **Exercise.** After placing the functions in the correct files, add the necessary ``import`` statements.
@@ -477,18 +563,7 @@ own ``jobs`` module.
     from flask import Flask, request
     import jobs
 
-    app = Flask(__name__)
-
-    @app.route('/jobs', methods=['POST'])
-    def jobs_api():
-        try:
-            job = request.get_json(force=True)
-        except Exception as e:
-            return True, json.dumps({'status': "Error", 'message': 'Invalid JSON: {}.'.format(e)})
-        return json.dumps(jobs.add_job(job['start'], job['end']))
-
-    if __name__ == '__main__':
-        app.run(debug=True, host='0.0.0.0')
+    # rest of the code same as above...
 
 For ``jobs.py``, there is nothing from our own code to import (which is good since the other modules will be importing
 from it, but we do need to import the ``StrictRedis`` and ``HotQueue`` classes. Also, don't forget the use of the
@@ -501,53 +576,8 @@ from it, but we do need to import the ``StrictRedis`` and ``HotQueue`` classes. 
     from hotqueue import HotQueue
     from redis import StrictRedis
 
-    q = HotQueue("queue", host='172.17.0.1', port=6379, db=1)
-    rd = StrictRedis(host='172.17.0.1', port=6379, db=0)
+    # rest of the code same as above...
 
-    def _generate_jid():
-        return str(uuid.uuid4())
-
-    def _generate_job_key(jid):
-        return 'job.{}'.format(jid)
-
-    def _instantiate_job(jid, status, start, end):
-        if type(jid) == str:
-            return {'id': jid,
-                    'status': status,
-                    'start': start,
-                    'end': end
-            }
-        return {'id': jid.decode('utf-8'),
-                'status': status.decode('utf-8'),
-                'start': start.decode('utf-8'),
-                'end': end.decode('utf-8')
-        }
-
-    def _save_job(job_key, job_dict):
-        """Save a job object in the Redis database."""
-        rd.hmset(.......)
-
-    def _queue_job(jid):
-        """Add a job to the redis queue."""
-        ....
-
-    def add_job(start, end, status="submitted"):
-        """Add a job to the redis queue."""
-        jid = _generate_jid()
-        job_dict = _instantiate_job(jid, status, start, end)
-        _save_job(......)
-        _queue_job(......)
-        return job_dict
-
-    def update_job_status(jid, status):
-        """Update the status of job with job id `jid` to status `status`."""
-        jid, status, start, end = rd.hmget(generate_job_key(jid), 'id', 'status', 'start', 'end')
-        job = _instantiate_job(jid, status, start, end)
-        if job:
-            job['status'] = status
-            _save_job(_generate_job_key(jid), job)
-        else:
-            raise Exception()
 
 Finally, on the surface it doesn't appear that the worker needs to import anything, but we know it needs the ``q``
 object to get items. It's hidden by the missing decorator. Let's go ahead and import it:
@@ -557,9 +587,7 @@ object to get items. It's hidden by the missing decorator. Let's go ahead and im
     # worker.py
     from jobs import q
 
-    @<...>   # fill in
-    def execute_job(jid):
-        # fill in ...
+    # rest of the code same as above...
 
 
 **Exercise.** Write code to finish the implementations for ``_save_job`` and ``_queue_job``.
@@ -571,7 +599,7 @@ should put it on the queue. We know how to write those:
 
     def _save_job(job_key, job_dict):
         """Save a job object in the Redis database."""
-        rd.hmset(job_key, job_dict)
+        rd.hset(job_key, mapping=job_dict)
 
     def _queue_job(jid):
         """Add a job to the redis queue."""
