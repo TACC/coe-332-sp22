@@ -82,6 +82,10 @@ interesting or important to have the application you developed, a detailed descr
 of the data (include citation), and you must include a short section on “Ethical and
 Professional Responsibilities in Engineering Situations".
 
+**NEW REQUIREMENT**: The write up must contain at least one design diagram showing
+the different parts of your software system and how they are connected. There
+should be supporting text to describe the diagram. We will cover some materials
+on creating design diagrams in future lectures.
 
 
 PART 4: Video Demo

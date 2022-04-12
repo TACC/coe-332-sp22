@@ -1,7 +1,7 @@
 Homework 05
 ===========
 
-**Due Date: Tuesday, Apr 5, by 11:00am CST**
+**Due Date: Tuesday, Apr 5, by 11:00am CDT**
 
 Back to the Flask
 -----------------
