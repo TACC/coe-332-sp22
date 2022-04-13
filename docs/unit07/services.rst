@@ -336,7 +336,7 @@ Create a persistent volume claim for your Redis data. Use the following informat
     add a ``username`` label and an ``env`` label. The value for ``username`` should be your tacc username and the value
     for ``env`` should be ``test``, to indicate that this is the test environment.
   * The ``accessModes`` should include a single entry, ``readWriteOnce``.
-  * The ``storageClassName`` should be ``rbd``.
+  * The ``storageClassName`` should be ``nfs``.
   * Be sure to request 1 GB (``1Gi``) of storage.
 
 
