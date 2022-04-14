@@ -12,7 +12,7 @@ By the end of this module, the student should be able to:
     Flask-based API system architecture.
   * Create task queues in Redis using the ``hotqueue`` library, and work with the ``put()`` and 
     ``consume()`` methods to queue and receive messages across two Python programs. 
-  * Use the ``q.worker`` decorator in the ``hotqueue`` to create a simple Python consumer program.
+  * Use the ``q.worker`` decorator in ``hotqueue`` to create a simple Python consumer program.
   * Explain the general approach to organizing Python code into different modules and describe how to
     do this for the flask-based API system we are building. 
   * Implement good code organization practices including denoting objects as public or private. 
@@ -48,8 +48,10 @@ With a ``q`` object defined like ``q = HotQueue("some_queue", host="<Redis_IP>",
 the consume method works as follows:
 
   * The ``q.consume()`` method returns an iterator which can be looped over using a ``for`` loop (much like a list).
+  * Each object returned by the iterator is a message received from the task queue.
   * The ``q.consume()`` method blocks (i.e., waits indefinitely) when there are no additional messages in the queue
     named ``some_queue``.
+  
 
 The basic syntax of the consume method is this:
 
@@ -58,8 +60,10 @@ The basic syntax of the consume method is this:
     for item in q.consume():
         # do something with item
 
+In this case, the ``item`` object is the message that was retrieved from the task queue. 
 
-**Exercises.** Complete the following:
+**Exercises.** Complete the following, either in Kubernetes or directly on isp02. (see k8s files
+below.)
 
   1. Start/scale two python debug containers with redis and hotqueue installed (you can use the ``jstubbs/redis-client`` image
      if you prefer). In two separate shells, exec into each debug container and start ipython.
@@ -69,6 +73,64 @@ The basic syntax of the consume method is this:
   5. Observe that the strings are printed out in the second terminal.
   6. Back in the first terminal, check the length of the queue; add some more objects to the queue.
   7. Confirm the newly added objects are "instantaneously" printed to the screen back in the second terminal.
+
+If you want, you can use the following k8s files for the exercise above (but if you already have a 
+redis deployment, you don't need to create a new one.)
+
+Content for the ``redis-client-debug-deployment.yml`` file: 
+
+.. code-block:: yaml
+
+  ---
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: redis-client-debug-deployment
+    labels:
+      app: redis-client-debug
+  spec:
+    replicas: 2
+    selector:
+      matchLabels:
+        app: redis-client-debug
+    template:
+      metadata:
+        labels:
+          app: redis-client-debug
+      spec:
+        containers:
+          - name: py39
+            image: jstubbs/redis-client
+            command: ['sleep', '999999999']
+
+
+Content for the ``redis-ex-deployment.yml`` file:
+
+.. code-block:: yaml
+
+  ---
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: jstubbs-redis-ex-deployment
+    labels:
+      app: jstubbs-redis-ex
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: jstubbs-redis-ex
+    template:
+      metadata:
+        labels:
+          app: jstubbs-redis-ex
+      spec:
+        containers:
+          - name: jstubbs-test-redis
+            image: redis:6
+
+
+
 
 The q.worker Decorator
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -201,6 +263,40 @@ and ``worker.py``.
   experience to do correctly, and when done poorly it can have dire consequences. In the best case, poor module
   design can make the software difficult to maintain/upgrade; in the worst case, it can prevent it from running
   correctly at all.
+
+We can sketch out our module design by making a list of the functionality that will be available 
+in each module. This is only an initial pass at listing the functionality needed -- we will refine it 
+over time -- but making an initial list is important for thinking through the problem. 
+
+``api.py``: This file will contain all the functionality related to the flask web server, and will 
+include functions related to each of the API endpoints in our application. 
+
+  * POST /data -- Load the data into the application. Will write to Redis.
+  * GET /data?search=... -- List all of the data in the system, optionally filtering with a search
+    query parameter. Will read from Redis.
+  * GET /data/<id> -- Get a specific object from the dataset using its ``id``. Will read from Redis.
+
+  * POST /jobs -- Create a new job. This function will save the job description to Redis and add a 
+    new task on the queue for the job. Will write to Redis and the queue. 
+  * GET /jobs -- List all the jobs. Will read from Redis. 
+  * GET /jobs/<id> -- Get the status of a specific job by id. Will read from Redis. 
+  * GET /jobs/<id>/results -- Return the outputs (results) of a completed job. Will read from Redis. 
+
+``worker.py``: This file will contain all of the functionality needed to get jobs from the task
+queue and execute the jobs. 
+
+  * Get a new job -- Hotqueue consumer to get an item off the queue. Will get from the queue and 
+    write to Redis to update the status of the job.
+  * Perform analysis -- 
+  * Finalize job -- Saves the results of the analysis and updates the job status to complete. Will
+    write to Redis. 
+
+``jobs.py``: This file will contain all functionality needed for working with jobs in the Redis 
+database and the Hotqueue queue. 
+
+  * Save a new job -- Will need to write to Redis.
+  * Retrieve an existing job - Will need to read from Redis. 
+  * Update an existing jobs -- Will need to read and write to Redis.  
 
 
 Private vs Public Objects
