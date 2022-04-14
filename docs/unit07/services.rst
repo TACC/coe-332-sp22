@@ -345,7 +345,7 @@ Step 2. Create a deployment for the Redis database. Be sure to include the follo
   * The name of your redis deployment should include your TACC username and the word "test", to indicate it is in the test environment.
   * Use the same ``username`` and ``env`` labels for both the deployment and the pod template.
   * Be sure to set ``replicas: 1`` as Redis is a stateful application.
-  * For the image, use ``redis:5.0.0``; you do not need to set a command.
+  * For the image, use ``redis:6``; you do not need to set a command.
   * Add the ``username`` and ``env`` lables to the pod as well. Also add an ``app`` label with value ``<username>-test-redis``.
     This will be important in the next step.
   * Be sure to create a ``volumeMount`` and associate it with a ``volume`` that is filled by the PVC you created in Step 1. For
