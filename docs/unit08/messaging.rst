@@ -720,7 +720,7 @@ thus becomes:
         return job_dict
 
 
-**Exercise.** Finish the ``execute_job`` function. This function needs a decorator (which one?)
+**Take-Home Exercise.** Finish the ``execute_job`` function. This function needs a decorator (which one?)
 and it needs a function body.
 
 The function body needs to:
@@ -763,3 +763,28 @@ The final ``worker.py`` is thus:
         jobs.update_job_status(jid, 'in progress')
         time.sleep(15)
         jobs.update_job_status(jid, 'complete')
+
+**Take-Home Exercise.** Modify the definition of the ``q`` and ``rd`` objects to not use a 
+hard-coded IP address but to instead read the IP address from an environment variable, ``REDIS_IP``.
+
+
+*Solution.* We can use ``os.environ.get("some_string")`` to get the value of an environment variable.
+
+.. code-block:: python
+
+    q = HotQueue("queue", host='172.17.0.1', port=6379, db=1)
+    rd = redis.StrictRedis(host='172.17.0.1', port=6379, db=0)
+
+becomes
+
+
+.. code-block:: python
+
+    import os
+
+    # read the ip address from the variable REDIS_IP, and provide a default value in case it is not
+    # set
+    redis_ip = os.environ.get('REDIS_IP', '172.17.0.1')
+    # create the q and rd objects using the variable 
+    q = HotQueue("queue", host=redis_ip, port=6379, db=1)
+    rd = redis.StrictRedis(host=redis_ip, port=6379, db=0)
