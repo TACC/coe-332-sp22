@@ -335,7 +335,7 @@ Create a persistent volume claim for your Redis data. Use the following informat
   * We'll make use of ``labels`` to add additional metadata to our k8s objects that will help us search and filter them. Let's
     add a ``username`` label and an ``env`` label. The value for ``username`` should be your tacc username and the value
     for ``env`` should be ``test``, to indicate that this is the test environment.
-  * The ``accessModes`` should include a single entry, ``readWriteOnce``.
+  * The ``accessModes`` should include a single entry, ``ReadWriteOnce``.
   * The ``storageClassName`` should be ``nfs``.
   * Be sure to request 1 GB (``1Gi``) of storage.
 
