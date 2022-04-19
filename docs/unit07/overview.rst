@@ -26,3 +26,5 @@ At the end of this unit you will:
    k8s
    deployments
    services
+   k8s_cheat_sheet
+
