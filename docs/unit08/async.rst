@@ -62,6 +62,27 @@ happens, just to make sure this is clear.
   4. Finally, it executes the ``do_work()`` function at the bottom. Since this function is decorated with the ``q.worker``
      decorator, it runs indefinitely, consuming messages from the Redis ``q`` queue.
 
+
+Python Buffering
+----------------
+
+By default, Python buffers output and does not send it to stdout immediately. That has implications for seeing
+logs using docker or kubernetes. To turn off buffering, use the `-u` flag when calling Python; for example, 
+
+.. code-block:: console
+
+  python -u main.py
+
+
+Another option is to use the ``PYTHONUNBUFFERED``  environment variable, e.g., 
+
+.. code-block:: console
+
+  export PYTHONUNBUFFERED=1
+
+For the exercise above, we'll use the ``-u`` option. We'll set this in the Dockerfile for our worker.
+
+
 Containerizing the Worker
 -------------------------
 There are multiple ways to containerize the worker, but the simplest approach is to add the ``worker.py`` code to the
@@ -80,7 +101,8 @@ For example, the Dockerfile could look like:
   WORKDIR /app
 
   ENTRYPOINT ["python"]
-  COMMAND ["app.py"]
+  # note the use of the -u option
+  COMMAND ["-u", "worker.py"]
 
 When running the flask application, the entrypoint and command are already correct. For running the worker, we simply
 update the command to be "worker.py" instead of "app.py".

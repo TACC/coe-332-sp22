@@ -686,7 +686,7 @@ object to get items. It's hidden by the missing decorator. Let's go ahead and im
     # rest of the code same as above...
 
 
-**Exercise.** Write code to finish the implementations for ``_save_job`` and ``_queue_job``.
+**Take-Home Exercise.** Write code to finish the implementations for ``_save_job`` and ``_queue_job``.
 
 *Solution.* The ``_save_job`` function should save the job to the database, while the ``_queue_job`` function
 should put it on the queue. We know how to write those:
@@ -702,7 +702,7 @@ should put it on the queue. We know how to write those:
         q.put(jid)
 
 
-**Exercise.** Fix the calls to ``_save_job`` and ``execute_job`` within the ``add_job`` function.
+**Take-Home Exercise.** Fix the calls to ``_save_job`` and ``execute_job`` within the ``add_job`` function.
 *Solution.* The issue in each of these are the missing parameters. The ``_save_job`` takes ``job_key, job_dict``, so
 we just need to pass those in. Similarly, ``_queue_job`` takes ``jid``, so we pass that in. The ``add_job`` function
 thus becomes:
