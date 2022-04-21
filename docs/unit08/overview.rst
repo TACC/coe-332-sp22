@@ -11,4 +11,5 @@ API project.
    concurrency
    messaging
    async
+   diagrams
 
