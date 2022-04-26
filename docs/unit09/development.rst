@@ -171,14 +171,3 @@ Write a Makefile that, at a minimum:
 1. Builds all necessary images for your app from Dockerfile(s)
 2. Starts up new containers / services
 3. Removes running containers in your namespace (be careful!)
-
-
-Docker-Compose
---------------
-
-Although it is not strictly necessary, it might also be useful to write Makefile
-targets to run a ``docker-compose`` deployment of all of your services as a unit.
-This behavior more closely mimics what it will be like to put services up in your
-Kubernetes deployment environment. Be careful, however, about the order in which
-docker-compose starts services. If the Redis DB service is not ready, your worker
-service(s) may exit immediately with an error like 'Can not connect to database'.
