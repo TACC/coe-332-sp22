@@ -14,6 +14,7 @@ After going through this module, students should be able to:
 * Name and organize YAML files for test and prod deployments of a software system
 * Sync files between two remote copies of a Git repository
 * Version code following semantic versioning specification
+* Attach a NodePort service to an API deployment
 * Deploy production and test copies of software system in Kubernetes
 
 
@@ -202,6 +203,61 @@ doing:
    Do you have a new software system that just kind of works and has a little bit
    of functionality, but you don't know what version tag to assign it? A good
    place to start is version 0.1.0.
+
+
+NodePort Service
+----------------
+
+So far we have only been able to interact with our deployed APIs via another
+pod that is running on the Kubernetes cluster. We can also reach our deployed
+APIs from the outside world (public URLs) using a NodePort Service.
+
+In Kubernetes, a range of ports, called NodePorts, are open on every node of the
+cluster. We have assigned two unique ports to each student (for test and prod), and 
+proxied those ports to two public URLs, exposing your test and prod APIs to the 
+outside world.
+
+On the Kubernetes cluster, we created a file called ``portinfo`` in each student's
+home directories. Cat the file to see the contents (every student's file is slightly 
+different):
+
+.. code-block:: console
+
+   [kube-2]$ cat ~/portinfo
+   docker port: 5042
+   kube port 1: 30042
+   kube port 2: 30142
+   public url 1: "https://isp-proxy.tacc.utexas.edu/USERNAME-1/"
+   public url 2: "https://isp-proxy.tacc.utexas.edu/USERNAME-2/"
+
+The important info from the example above is that using NodePort ``30042`` will expose
+an interface to the API at public URL ``https://isp-proxy.tacc.utexas.edu/USERNAME-1/``,
+and using NodePort ``30142`` will expose an interface to the API at public URL
+``https://isp-proxy.tacc.utexas.edu/USERNAME-2/``. In practice, one of these ports
+should be attached to your test deployment, and the other should be attached to your
+production deployment.
+
+An example NodePort service YAML file may include (be sure to use an app selector that
+matches the correct deployment):
+
+.. code-block:: yaml
+
+   ---
+   apiVersion: v1
+   kind: Service
+   metadata:
+     name: hello-service
+   spec:
+     type: NodePort
+     selector:
+       app: hello-app
+     ports:
+     - name: hello-app
+       port: 5000
+       targetPort: 5000
+       nodePort: 30042
+
+
 
 
 Production Deployment

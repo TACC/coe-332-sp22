@@ -17,6 +17,7 @@ students should be able to:
 * Identify Python frameworks for integration testing
 * Identify aspects of a software system that should be tested with integration testing
 * Use the Python requests library to interact with the API of your software system
+* Write and execute useful integration tests using ``pytest`` and ``assert`` statements
 
 
 
