@@ -1,8 +1,8 @@
 Deployment Environment
 ======================
 
-Our deployment environment for this API will be the class Kuberentes cluster. It
-could just as easily be AWS, or Azure, or Google Cloud, or another Kuberenets
+Our deployment environment for this API will be the class Kubernetes cluster. It
+could just as easily be AWS, or Azure, or Google Cloud, or another Kubernetes
 cluster. Remember if you containerize everything, it becomes extremely portable.
 In contrast to our development environment, the Kubernetes deployment is meant
 to be long-lasting, highly available, and consumable by the public. We will have
