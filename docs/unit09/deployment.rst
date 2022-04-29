@@ -95,7 +95,7 @@ like the following:
 
 .. code-block:: console
 
-   [isp02]$ kubectl apply -f kubernetes/test/
+   [kube-2]$ kubectl apply -f kubernetes/test/
 
 Kubernetes will apply all the files found in the test folder. Be careful, however,
 about the order in which things are applied. For example, the Redis DB deployment
