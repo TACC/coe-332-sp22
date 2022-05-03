@@ -16,3 +16,4 @@ continuous integration.
    development
    deployment
    integration_testing
+   continuous_integration
