@@ -126,6 +126,7 @@ repository may contain the following after completing the Final:
     ├── requirements.txt
     ├── src
     │   ├── flask_api.py
+    │   ├── jobs.py        # you may or may not have this file
     │   └── worker.py
     └── test
         └── test_flask.py
@@ -136,6 +137,21 @@ Send an email to wallen@tacc.utexas.edu with the written PDF summary of the proj
 attached plus a link to your new GitHub repository plus a link to download the
 zoom recording. Please include "Final Project" in the subject line. We will clone
 all of your repos at the due date / time for evaluation.
+
+
+.. note::
+
+   Note from Slack: There has been some confusion about whether or not to include
+   jobs.py in the final project, because I did not explicitly list that file under
+   ‘what to turn in’ in the final project description. If you have it and it is
+   part of your software system, then yes absolutely include it in the repo. We
+   are usually careful to say “A sample git repo may contain…“, meaning the example
+   we give is an example only, not set in stone. Some people may arrange their python
+   functions into a jobs.py file, and some people may not. It is dependent on your
+   situation and how you choose to design your system. But yes, at the end of the
+   day please commit and push every file that is an essential part of the whole system
+
+
 
 Additional Resources
 --------------------
