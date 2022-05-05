@@ -126,7 +126,7 @@ repository may contain the following after completing the Final:
     ├── requirements.txt
     ├── src
     │   ├── flask_api.py
-    │   ├── jobs.py        # you may or may not have this file
+    │   ├── jobs.py        # you may or may not have this file, see note below
     │   └── worker.py
     └── test
         └── test_flask.py
