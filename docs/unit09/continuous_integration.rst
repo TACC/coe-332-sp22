@@ -123,10 +123,10 @@ To set up GitHub Actions in an existing repository, create a new folder as follo
 
 .. code-block:: console
 
-   [isp02]$ mkdir -p .github/workflow/
+   [isp02]$ mkdir -p .github/workflows/
 
 Within that folder we will put YAML files describing when, how, and what workflows
-should be triggered. For instance, create a new YAML file (``.github/workflow/integration-test.yml``)
+should be triggered. For instance, create a new YAML file (``.github/workflows/integration-test.yml``)
 to perform our integration testing with the following contents:
 
 .. code-block:: yaml
